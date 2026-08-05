@@ -11,11 +11,11 @@ export const generateOrganizationSchema = () => ({
   description: 'Flagship digital growth agency building high-performance web applications, client intake engines, and custom software platforms.',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '500 Howard Street, Suite 400',
-    addressLocality: 'San Francisco',
-    addressRegion: 'CA',
-    postalCode: '94105',
-    addressCountry: 'US'
+    streetAddress: 'Indore, Madhya Pradesh',
+    addressLocality: 'Indore',
+    addressRegion: 'Madhya Pradesh',
+    postalCode: '452001',
+    addressCountry: 'IN'
   },
   contactPoint: {
     '@type': 'ContactPoint',

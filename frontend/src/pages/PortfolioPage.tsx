@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, Check, ArrowRight, ChevronDown } from 'lucide-react';
 import { SEOHead } from '../seo/SEOHead';
@@ -62,6 +62,71 @@ const projectDetails: Record<string, ExtendedProjectDetail> = {
     ],
     challenge: 'Third-party delivery/booking platforms charged 15-30% commissions on reservations and menu checkouts.',
     solution: 'Engineered a direct hospitality ordering engine, utilizing local cookies for guest state, Stripe APIs, and custom SMS alerts.'
+  },
+  'proj-law': {
+    url: 'https://law.bytebuild.dev',
+    category: 'Corporate Law Tech',
+    tech: ['React 18', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    highlights: ['1-Click Secure Doc Processing', 'Automated Retainer Billing Logic', 'Self-Service Intake Matrix'],
+    metrics: [
+      { label: 'Retainer Volume', value: '+190% Active' },
+      { label: 'Admin Onboarding', value: '-70% Cost' },
+      { label: 'Client Rating', value: '4.95 Stars' }
+    ],
+    challenge: 'Managing paper client questionnaires and manually routing retainer contracts created onboarding backlogs.',
+    solution: 'Engineered a secure legal client onboarding portal with dynamic logic questionnaires, Stripe integration, and contract generation.'
+  },
+  'proj-medspa': {
+    url: 'https://medspa-app.bytebuild.dev',
+    category: 'Wellness & Mobile Web App',
+    tech: ['React 18', 'TypeScript', 'Capacitor', 'Framer Motion'],
+    highlights: ['Touch-First Mobile Care Scheduling', 'Dynamic Service Visualizer Engine', 'SMS Push Notification Integration'],
+    metrics: [
+      { label: 'Client Retention', value: '92% Repeat' },
+      { label: 'Mobile Bookings', value: '85% Traffic' },
+      { label: 'Intake Velocity', value: '<60s Form' }
+    ],
+    challenge: 'Wellness clients struggled to book recurring spa sessions on mobile screens due to a cramped legacy desktop portal.',
+    solution: 'Designed and built a mobile-first web app with oversized custom touch controls, visual calendar scheduling, and automated SMS alerts.'
+  },
+  'proj-portfolio': {
+    url: 'https://studio-horizon.bytebuild.dev',
+    category: 'Architecture & Creative Portfolio',
+    tech: ['React 18', 'TypeScript', 'Tailwind', 'Cloudflare CDN'],
+    highlights: ['Immersive Modular Media Grids', 'Sub-300ms Image Asset Lazy-Loading', 'Integrated Contact & Intake Funnel'],
+    metrics: [
+      { label: 'Asset Load Time', value: '<250ms Load' },
+      { label: 'Visitor Inquiries', value: '+140% Leads' },
+      { label: 'Session Duration', value: '+180% Time' }
+    ],
+    challenge: 'High-res structural engineering and design renders loaded slowly, causing potential high-value clients to leave the site prematurely.',
+    solution: 'Designed and built a sleek, media-optimized showcase utilizing next-gen image formats, serverless edge routing, and automated compression pipelines.'
+  },
+  'proj-portfolio-2': {
+    url: 'https://vanguard.bytebuild.dev',
+    category: 'Immersive Creative Portfolio',
+    tech: ['React 18', 'TypeScript', 'Tailwind', 'Framer Motion'],
+    highlights: ['Cinematic Dark-Mode Aesthetics', 'Dynamic Filterable Work Grid', 'Integrated Booking Calendar'],
+    metrics: [
+      { label: 'Booking Rate', value: '+165% Calls' },
+      { label: 'Session Velocity', value: '+120% Engagement' },
+      { label: 'Asset Payload', value: '-65% Optim' }
+    ],
+    challenge: 'A prominent Creative Director was losing high-ticket consulting inquiries because their old portfolio site was static, unoptimized for mobile, and lacked direct scheduling.',
+    solution: 'Designed and built a highly interactive dark-mode portfolio web app featuring liquid page transitions, automated media compression, and direct calendar sync.'
+  },
+  'proj-portfolio-3': {
+    url: 'https://aether.bytebuild.dev',
+    category: 'Immersive Photography Portfolio',
+    tech: ['React 18', 'TypeScript', 'Tailwind', 'Cloudinary API'],
+    highlights: ['Zero-Layout Shift Masonry Grid', 'Next-Gen WebP Asset Pipeline', 'Instant Client Inquiry Trigger'],
+    metrics: [
+      { label: 'Booking Rate', value: '+150% Leads' },
+      { label: 'Media Load Velocity', value: '-80% Latency' },
+      { label: 'SEO Visibility', value: '+210% Reach' }
+    ],
+    challenge: 'A commercial photography studio experienced high bounce rates on mobile due to heavy unoptimized JPEG payloads and erratic masonry layout shifts during loading.',
+    solution: 'Designed and built a React-based gallery featuring dynamic column resizing, automated Cloudinary compression, and progressive blur hashes for smooth rendering.'
   }
 };
 
@@ -70,11 +135,26 @@ export const PortfolioPage: React.FC = () => {
   const isMobile = useIsMobile();
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
   const [expandedCaseId, setExpandedCaseId] = useState<string | null>(null);
+  const [filterType, setFilterType] = useState<'web' | 'mobile' | 'portfolio'>('web');
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const filteredProjects = useMemo(() => {
+    return portfolioProjects.filter(p => p.projectType === filterType);
+  }, [filterType]);
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = 0;
+    }
+    setActiveProjectIdx(0);
+    setExpandedCaseId(null);
+  }, [filterType]);
 
   const handleProjectScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
     const index = Math.round(container.scrollLeft / (container.clientWidth - 32));
-    setActiveProjectIdx(Math.min(Math.max(index, 0), portfolioProjects.length - 1));
+    setActiveProjectIdx(Math.min(Math.max(index, 0), filteredProjects.length - 1));
   };
 
   return (
@@ -108,7 +188,11 @@ export const PortfolioPage: React.FC = () => {
             </h1>
 
             <p className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto">
-              Explore our portfolio of custom websites, booking engines, and digital experiences delivered with measurable results.
+              <TextReveal text="Explore our portfolio of custom websites, booking engines, and digital experiences" />
+              <br className="hidden sm:inline" />
+              <TextHighlighter highlightColor="from-cyan-500/40 to-blue-500/40">
+                <span className="font-bold text-[var(--text-primary)]">delivered with measurable results.</span>
+              </TextHighlighter>
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
@@ -148,18 +232,61 @@ export const PortfolioPage: React.FC = () => {
               </div>
             </div>
 
+            {/* Filter Tabs */}
+            <div className="flex justify-center pb-8 pt-4">
+              <div className="inline-flex rounded-full neo-inset p-1 border border-[var(--border-subtle)] bg-[var(--surface-recessed)]/50 gap-1.5 flex-wrap justify-center max-w-full">
+                <button
+                  onClick={() => { setFilterType('web'); setActiveProjectIdx(0); }}
+                  className={`rounded-full px-5 py-2 text-xs font-bold transition-all duration-300 whitespace-nowrap ${
+                    filterType === 'web'
+                      ? 'bg-[var(--surface-card)] text-[var(--accent-primary)] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[var(--border-light)]'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  }`}
+                >
+                  Web Projects (4)
+                </button>
+                <button
+                  onClick={() => { setFilterType('portfolio'); setActiveProjectIdx(0); }}
+                  className={`rounded-full px-5 py-2 text-xs font-bold transition-all duration-300 whitespace-nowrap ${
+                    filterType === 'portfolio'
+                      ? 'bg-[var(--surface-card)] text-[var(--accent-primary)] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[var(--border-light)]'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  }`}
+                >
+                  Portfolio Websites (3)
+                </button>
+                <button
+                  onClick={() => { setFilterType('mobile'); setActiveProjectIdx(0); }}
+                  className={`rounded-full px-5 py-2 text-xs font-bold transition-all duration-300 whitespace-nowrap ${
+                    filterType === 'mobile'
+                      ? 'bg-[var(--surface-card)] text-[var(--accent-primary)] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[var(--border-light)]'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  }`}
+                >
+                  Mobile Web Project (1)
+                </button>
+              </div>
+            </div>
+
             {isMobile ? (
-              <div className="space-y-4">
+              <motion.div
+                key={filterType}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="space-y-4"
+              >
                 <div className="flex items-center justify-between px-4 text-[11px] font-mono text-[var(--text-tertiary)] uppercase tracking-wider">
                   <span>Swipe Projects</span>
-                  <span className="text-[var(--accent-primary)] font-bold">3 Cases →</span>
+                  <span className="text-[var(--accent-primary)] font-bold">{filteredProjects.length} Cases →</span>
                 </div>
 
                 <div 
+                  ref={scrollContainerRef}
                   onScroll={handleProjectScroll}
                   className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-6 px-4 pb-6 select-none -webkit-overflow-scrolling-touch"
                 >
-                  {portfolioProjects.map((project) => {
+                  {filteredProjects.map((project) => {
                     const details = projectDetails[project.id];
                     const isCaseExpanded = expandedCaseId === project.id;
 
@@ -258,7 +385,7 @@ export const PortfolioPage: React.FC = () => {
 
                 {/* Project Swipe Pagination Dots */}
                 <div className="flex justify-center gap-2 pt-2">
-                  {portfolioProjects.map((_, i) => (
+                  {filteredProjects.map((_, i) => (
                     <div
                       key={i}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
@@ -267,11 +394,17 @@ export const PortfolioPage: React.FC = () => {
                     />
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ) : (
               /* Alternating Feature Cards */
-              <div className="space-y-12">
-                {portfolioProjects.map((project, idx) => {
+              <motion.div 
+                key={filterType}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+                className="space-y-12"
+              >
+                {filteredProjects.map((project, idx) => {
                   const details = projectDetails[project.id] || {
                     url: `https://${project.id}.bytebuild.dev`,
                     category: 'Digital Web Solution',
@@ -283,10 +416,9 @@ export const PortfolioPage: React.FC = () => {
                   return (
                     <motion.div
                       key={project.id}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      initial={{ opacity: 0, y: 25 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: idx * 0.08 }}
                       className="neo-card p-6 md:p-10 border border-[var(--border-light)] rounded-[28px] section-card group relative overflow-hidden shadow-xl"
                     >
                       {/* Soft Background Ambient Glow */}
@@ -388,7 +520,7 @@ export const PortfolioPage: React.FC = () => {
                     </motion.div>
                   );
                 })}
-              </div>
+              </motion.div>
             )}
           </div>
 

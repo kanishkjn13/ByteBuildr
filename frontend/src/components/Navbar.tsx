@@ -103,22 +103,30 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Center: Clean Nav Links (Tablet & Desktop) */}
             <nav className="hidden md:flex items-center rounded-full neo-inset border border-[var(--border-subtle)] bg-[var(--surface-recessed)]/50 gap-1.5 p-1 px-2.5 transition-all duration-300">
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  onClick={handleNavClick}
-                  className={({ isActive }) =>
-                    `rounded-full font-semibold transition-all duration-300 px-3.5 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm ${
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <NavLink
+                    key={link.path}
+                    to={link.path}
+                    onClick={handleNavClick}
+                    className={`relative rounded-full font-semibold transition-all duration-300 px-3.5 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm ${
                       isActive
-                        ? 'bg-[var(--surface-card)] text-[var(--accent-primary)] font-bold shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[var(--border-light)]'
+                        ? 'text-[var(--accent-primary)] font-bold'
                         : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-                    }`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
+                    }`}
+                  >
+                    <span className="relative z-10">{link.label}</span>
+                    {isActive && (
+                      <motion.span
+                        layoutId="activeNavIndicator"
+                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-[var(--accent-primary)] rounded-full z-0"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </NavLink>
+                );
+              })}
             </nav>
 
             {/* Right: Theme Toggle + Booking CTA (Tablet & Desktop) */}
@@ -302,13 +310,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                         <span className="font-bold text-[var(--text-primary)] text-sm">+1 (415) 890-3420</span>
                       </div>
                     </a>
-                    <a href="mailto:hello@bytebuild.com" className="flex items-center gap-3.5 text-xs text-[var(--text-secondary)] font-semibold hover:text-[var(--accent-primary)] transition-colors">
+                    <a href="mailto:ByteBuildd@gmail.com" className="flex items-center gap-3.5 text-xs text-[var(--text-secondary)] font-semibold hover:text-[var(--accent-primary)] transition-colors">
                       <div className="w-8 h-8 rounded-xl neo-inset flex items-center justify-center text-[var(--accent-primary)]">
                         <Mail className="w-4 h-4" />
                       </div>
                       <div>
                         <span className="block text-[10px] text-[var(--text-tertiary)] font-normal">Email Support</span>
-                        <span className="font-bold text-[var(--text-primary)] text-sm">hello@bytebuild.com</span>
+                        <span className="font-bold text-[var(--text-primary)] text-sm">ByteBuildd@gmail.com</span>
                       </div>
                     </a>
                   </div>

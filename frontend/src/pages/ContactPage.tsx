@@ -19,6 +19,7 @@ import { SEOHead } from '../seo/SEOHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { TextReveal } from '../components/effects/TextReveal';
 import { GradientText } from '../components/effects/GradientText';
+import { TextHighlighter } from '../components/effects/TextHighlighter';
 import { useIsMobile } from '../hooks/useIsMobile';
 
 export const ContactPage: React.FC = () => {
@@ -153,8 +154,12 @@ export const ContactPage: React.FC = () => {
               <GradientText>You.</GradientText>
             </h1>
 
-            <p className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl mx-auto">
-              Please share your contact details below. Our senior team will review your message and reach out to you within 12 hours.
+            <p className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto">
+              <TextReveal text="Please share your details below. Our senior team will review your message and" />
+              <br className="hidden sm:inline" />
+              <TextHighlighter highlightColor="from-cyan-500/40 to-blue-500/40">
+                <span className="font-bold text-[var(--text-primary)]">reach out to you within 12 hours.</span>
+              </TextHighlighter>
             </p>
           </motion.div>
 
@@ -447,12 +452,12 @@ export const ContactPage: React.FC = () => {
                 <GradientText>Direct Channels & Response Protocol</GradientText>
               </h2>
               <p className="text-xs md:text-sm text-[var(--text-secondary)] max-w-xl mx-auto">
-                Prefer direct email or phone? Reach out to our senior team through any of our verified communication channels.
+                Prefer direct communication? Reach out to our senior team through our verified channels below.
               </p>
             </div>
 
-            {/* Direct Contact Cards (3 Column Grid) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Direct Contact Cards (2 Column Grid) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {/* Card 1: Direct Email */}
               <motion.div
                 whileHover={{ y: -4 }}
@@ -466,10 +471,10 @@ export const ContactPage: React.FC = () => {
                     Direct Email
                   </span>
                   <a
-                    href="mailto:contact@bytebuild.dev"
+                    href="mailto:ByteBuildd@gmail.com"
                     className="text-sm font-extrabold text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors block truncate"
                   >
-                    contact@bytebuild.dev
+                    ByteBuildd@gmail.com
                   </a>
                 </div>
                 <div className="neo-pill px-3 py-1 text-[10px] font-mono text-emerald-500 font-bold inline-flex items-center gap-1.5">
@@ -478,32 +483,7 @@ export const ContactPage: React.FC = () => {
                 </div>
               </motion.div>
 
-              {/* Card 2: Phone Hotline */}
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="neo-card p-6 rounded-2xl border border-[var(--border-light)] space-y-4 text-left"
-              >
-                <div className="w-10 h-10 rounded-xl neo-inset flex items-center justify-center text-[var(--accent-primary)]">
-                  <Phone className="w-5 h-5" />
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-[var(--text-tertiary)] font-bold block">
-                    Phone & SMS Line
-                  </span>
-                  <a
-                    href="tel:+18005550199"
-                    className="text-sm font-extrabold text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors block"
-                  >
-                    +1 (800) 555-0199
-                  </a>
-                </div>
-                <div className="neo-pill px-3 py-1 text-[10px] font-mono text-[var(--text-tertiary)] font-bold inline-flex items-center gap-1.5">
-                  <Clock className="w-3 h-3 text-[var(--accent-primary)]" />
-                  <span>Mon–Fri 8am–6pm EST</span>
-                </div>
-              </motion.div>
-
-              {/* Card 3: Studio HQ */}
+              {/* Card 2: Studio HQ */}
               <motion.div
                 whileHover={{ y: -4 }}
                 className="neo-card p-6 rounded-2xl border border-[var(--border-light)] space-y-4 text-left"
@@ -516,7 +496,7 @@ export const ContactPage: React.FC = () => {
                     Studio Headquarters
                   </span>
                   <address className="text-xs font-bold text-[var(--text-primary)] not-italic leading-relaxed block">
-                    100 Montgomery St, Suite 2400<br />San Francisco, CA 94104
+                    Indore, Madhya Pradesh<br />India
                   </address>
                 </div>
                 <div className="neo-pill px-3 py-1 text-[10px] font-mono text-[var(--text-tertiary)] font-bold inline-flex items-center gap-1.5">

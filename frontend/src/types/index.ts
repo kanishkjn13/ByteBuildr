@@ -30,6 +30,7 @@ export interface PortfolioProject {
   tags: string[];
   heroImage: string;
   result: string;
+  projectType?: 'web' | 'mobile' | 'portfolio';
 }
 
 export interface ServiceItem {

@@ -5,7 +5,7 @@ export const agencyInfo = {
   tagline: 'Strategic Digital Growth Partners for Modern Enterprises',
   subheadline: 'We design and engineer bespoke web platforms, client intake engines, and digital brand experiences that earn long-term trust and accelerate revenue.',
   established: '2026',
-  location: 'San Francisco • London • Singapore',
+  location: 'Indore, India',
   stats: [
     { value: '100%', label: 'Custom Code Architecture' },
     { value: '100/100', label: 'Lighthouse Performance Target' },
@@ -208,7 +208,8 @@ export const portfolioProjects: PortfolioProject[] = [
     summary: 'Soft neomorphic web application with 1-click calendar booking and instant digital patient intake.',
     tags: ['Healthcare', 'Web App', 'Booking Engine'],
     heroImage: '/images/clinic.png',
-    result: '+280% Patient Appointments'
+    result: '+280% Patient Appointments',
+    projectType: 'web'
   },
   {
     id: 'proj-realestate',
@@ -218,7 +219,8 @@ export const portfolioProjects: PortfolioProject[] = [
     summary: 'High-speed web portal featuring interactive property previews and VIP inquiry channels.',
     tags: ['Real Estate', 'Luxury Portal', 'Interactive UI'],
     heroImage: '/images/realestate.png',
-    result: '$18.5M Qualified Sales'
+    result: '$18.5M Qualified Sales',
+    projectType: 'web'
   },
   {
     id: 'proj-hospitality',
@@ -228,7 +230,63 @@ export const portfolioProjects: PortfolioProject[] = [
     summary: 'Direct table reservation engine with digital culinary previews and guest notifications.',
     tags: ['Hospitality', 'Direct Reservations', 'Stripe POS'],
     heroImage: '/images/hospitality.png',
-    result: '$65,000 Saved in Fees'
+    result: '$65,000 Saved in Fees',
+    projectType: 'web'
+  },
+  {
+    id: 'proj-law',
+    industryId: 'legal',
+    title: 'Byte Build Law • Legal Intake & Retainer Platform',
+    clientName: 'Byte Build Corporate Law',
+    summary: 'Secure legal client onboarding portal with dynamic legal intake questionnaires and Stripe retainers.',
+    tags: ['Legal Tech', 'Intake Funnel', 'Retainers'],
+    heroImage: '/images/realestate.png',
+    result: '+190% Monthly Retainers',
+    projectType: 'web'
+  },
+  {
+    id: 'proj-medspa',
+    industryId: 'healthcare',
+    title: 'Equinox MedSpa • Mobile Intake App',
+    clientName: 'Equinox MedSpa',
+    summary: 'Lightweight mobile web onboarding companion with touch-friendly scheduler, treatment visualizer, and custom service consultation.',
+    tags: ['Wellness', 'Mobile Web App', 'Intake Engine'],
+    heroImage: '/images/clinic.png',
+    result: '92% Customer Retention',
+    projectType: 'mobile'
+  },
+  {
+    id: 'proj-portfolio',
+    industryId: 'architecture',
+    title: 'Studio Horizon • Immersive Architectural Portfolio',
+    clientName: 'Studio Horizon Architects',
+    summary: 'Sub-500ms immersive portfolio showcase featuring modular media grids, interactive project stories, and consultation intake channels.',
+    tags: ['Architecture', 'Creative Portfolio', 'Media Optimization'],
+    heroImage: '/images/realestate.png',
+    result: '+140% Qualified Inquiries',
+    projectType: 'portfolio'
+  },
+  {
+    id: 'proj-portfolio-2',
+    industryId: 'startups',
+    title: 'Vanguard Studio • Creative Director Immersive Portfolio',
+    clientName: 'Vanguard Creative Director',
+    summary: 'Cinematic, dark-mode portfolio showcase with fluid animations, dynamic work filters, and integrated consulting scheduler.',
+    tags: ['Creative Director', 'Media Showcase', 'Framer Motion'],
+    heroImage: '/images/realestate.png',
+    result: '+165% Agency Bookings',
+    projectType: 'portfolio'
+  },
+  {
+    id: 'proj-portfolio-3',
+    industryId: 'startups',
+    title: 'Aether Gallery • Immersive Photography Portfolio',
+    clientName: 'Aether Studio Photography',
+    summary: 'Ultra-high resolution photography showcase featuring zero-layout shift masonry grids, next-gen WebP compression pipelines, and booking triggers.',
+    tags: ['Photography', 'Media Showcase', 'WebP Optimizer'],
+    heroImage: '/images/hospitality.png',
+    result: '+150% Booking Conversion',
+    projectType: 'portfolio'
   }
 ];
 

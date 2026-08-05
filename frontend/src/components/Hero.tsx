@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { LaptopMockup } from './ui/LaptopMockup';
 import { TextReveal } from './effects/TextReveal';
 import { GradientText } from './effects/GradientText';
+import { TextHighlighter } from './effects/TextHighlighter';
 import { Sparkles, ArrowRight } from 'lucide-react';
 
 interface HeroProps {
@@ -73,7 +74,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onNavigateToCalculato
               We Build Web Engines That <GradientText>Get You Qualified Leads.</GradientText>
             </h1>
             <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-medium">
-              Bespoke digital platforms engineered for sub-second speed, trust, and client acquisition.
+              <TextReveal text="Bespoke digital platforms engineered for" />
+              <br className="hidden sm:inline" />
+              <TextHighlighter highlightColor="from-cyan-500/40 to-blue-500/40">
+                <span className="font-bold text-[var(--text-primary)]">sub-second speed, trust, and client acquisition.</span>
+              </TextHighlighter>
             </p>
           </motion.div>
 
@@ -151,6 +156,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onNavigateToCalculato
               <TextReveal text="We Build Web Engines That" />{' '}
               <GradientText>Get You Qualified Leads.</GradientText>
             </h1>
+
+            {/* Subheading */}
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed font-medium max-w-md">
+              <TextReveal text="Bespoke digital platforms engineered for" />
+              <br className="hidden sm:inline" />
+              <TextHighlighter highlightColor="from-cyan-500/40 to-blue-500/40">
+                <span className="font-bold text-[var(--text-primary)]">sub-second speed, trust, and client acquisition.</span>
+              </TextHighlighter>
+            </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">

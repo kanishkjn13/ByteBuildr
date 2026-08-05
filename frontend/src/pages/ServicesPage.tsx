@@ -16,6 +16,8 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { useBooking } from '../hooks/useBooking';
 import { ROUTES } from '../constants/routes';
 import { GradientText } from '../components/effects/GradientText';
+import { TextReveal } from '../components/effects/TextReveal';
+import { TextHighlighter } from '../components/effects/TextHighlighter';
 import { TechStackMarquee } from '../components/common/TechStackMarquee';
 import { FinalCTASection } from '../components/sections/FinalCTASection';
 
@@ -154,7 +156,11 @@ export const ServicesPage: React.FC = () => {
               transition={{ delay: 0.2, duration: 0.4 }}
               className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto"
             >
-              We craft clean, fast, and modern websites that help your business look professional and turn visitors into real clients. No complex jargon—just great work.
+              <TextReveal text="We craft clean, fast, and modern websites that help your business look professional and" />
+              <br className="hidden sm:inline" />
+              <TextHighlighter highlightColor="from-cyan-500/40 to-blue-500/40">
+                <span className="font-bold text-[var(--text-primary)]">turn visitors into real clients. No complex jargon—just great work.</span>
+              </TextHighlighter>
             </motion.p>
 
             <motion.div 

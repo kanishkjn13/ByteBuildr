@@ -22,7 +22,7 @@ export const AdminSettingsView: React.FC<AdminSettingsViewProps> = ({ onNavigate
 
   // Settings State
   const [agencyName, setAgencyName] = useState('Byte Build Agency');
-  const [businessEmail, setBusinessEmail] = useState('hello@bytebuild.dev');
+  const [businessEmail, setBusinessEmail] = useState('ByteBuildd@gmail.com');
   const [phone, setPhone] = useState('+1 (415) 555-0199');
   const [timeZone, setTimeZone] = useState('UTC-05:00 Eastern Time');
   const [currency, setCurrency] = useState('USD ($)');
@@ -266,13 +266,13 @@ export const AdminSettingsView: React.FC<AdminSettingsViewProps> = ({ onNavigate
 
               <div>
                 <label className="font-bold text-[var(--text-tertiary)] block mb-1">Sender Email</label>
-                <input type="email" defaultValue="notifications@bytebuild.dev" className="neo-input text-xs font-mono" />
+                <input type="email" defaultValue="ByteBuildd@gmail.com" className="neo-input text-xs font-mono" />
               </div>
             </div>
 
             <div className="pt-2 flex items-center justify-between">
               <button
-                onClick={() => triggerToast('Test email dispatched to hello@bytebuild.dev!')}
+                onClick={() => triggerToast('Test email dispatched to ByteBuildd@gmail.com!')}
                 className="neo-btn text-xs py-2 px-4 font-bold inline-flex items-center gap-1.5"
               >
                 <Send className="w-3.5 h-3.5" />
