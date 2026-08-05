@@ -15,9 +15,7 @@ import {
   Camera,
   Globe,
   Mail,
-  Phone,
-  MapPin,
-  FileText
+  Phone
 } from 'lucide-react';
 import type { ClientProfile, PortalView } from '../types';
 

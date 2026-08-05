@@ -84,7 +84,7 @@ export const MessagesView: React.FC<MessagesViewProps> = ({
     const newMsg: MessageItem = {
       id: `m-${Date.now()}`,
       conversationId: activeConvId,
-      sender: profile.name,
+      sender: profile.name || 'Client',
       role: 'Client',
       avatar: profile.photoUrl,
       text: inputText.trim(),

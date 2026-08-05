@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Lock, Building2, ArrowLeft, Mail, Info } from 'lucide-react';
+import { Shield, Lock, Building2, Mail, Info } from 'lucide-react';
 import { ROUTES } from '../../constants/routes';
 
 export const RegisterPage: React.FC = () => {

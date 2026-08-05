@@ -19,7 +19,6 @@ import {
   Globe,
   MapPin,
   Shield,
-  Lock,
   Key,
   Copy,
   RefreshCw
@@ -103,6 +102,7 @@ export const AdminClientsView: React.FC<AdminClientsViewProps> = ({ onNavigate }
       state: 'CA',
       country: 'United States',
       joinedDate: 'Just Now',
+      lastActivity: 'Just now',
       activeProjects: [],
       projectManager: {
         name: 'Alexander Vance',

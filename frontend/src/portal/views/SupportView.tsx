@@ -105,7 +105,7 @@ export const SupportView: React.FC<SupportViewProps> = ({
       conversation: [
         {
           id: `tm-${Date.now()}`,
-          sender: profile.name,
+          sender: profile.name || 'Client',
           role: 'Client',
           avatar: profile.photoUrl,
           text: description.trim(),
@@ -132,7 +132,7 @@ export const SupportView: React.FC<SupportViewProps> = ({
 
     const newReply = {
       id: `tm-${Date.now()}`,
-      sender: profile.name,
+      sender: profile.name || 'Client',
       role: 'Client',
       avatar: profile.photoUrl,
       text: replyText.trim(),
