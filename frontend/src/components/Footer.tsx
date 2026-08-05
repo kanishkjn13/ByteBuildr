@@ -31,15 +31,20 @@ export const Footer: React.FC = () => {
         {/* Responsive Centered Minimal Footer */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-xs text-center">
           
-          <Link to={ROUTES.HOME} className="flex items-center gap-2 group">
+          <Link to={ROUTES.HOME} className="flex items-center gap-2.5 group text-left">
             <img 
               src="/logo.png" 
               alt="Byte Build Logo" 
               className="w-7 h-7 object-contain group-hover:scale-105 transition-all duration-300"
             />
-            <span className="font-extrabold text-xs tracking-tight text-[var(--text-primary)]">
-              BYTE BUILD
-            </span>
+            <div>
+              <span className="font-extrabold text-xs tracking-tight text-[var(--text-primary)] block leading-none">
+                BYTE BUILD
+              </span>
+              <span className="text-[7.5px] font-mono tracking-[0.08em] text-[var(--text-tertiary)] uppercase block mt-0.5 font-bold">
+                We Build Trust
+              </span>
+            </div>
           </Link>
 
           <span className="hidden md:inline text-[var(--border-light)] font-light">|</span>

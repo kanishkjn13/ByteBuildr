@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   BYTE BUILD
                 </span>
                 <span className="text-[9px] font-mono tracking-[0.22em] text-[var(--accent-primary)] uppercase block mt-1 font-bold">
-                  Digital Partners
+                  We Build Trust
                 </span>
               </div>
             </Link>
