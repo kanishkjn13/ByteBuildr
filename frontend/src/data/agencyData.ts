@@ -2,7 +2,7 @@ import type { IndustrySolution, PortfolioProject, ServiceItem, FaqItem, Resource
 
 export const agencyInfo = {
   name: 'Byte Build',
-  tagline: 'Strategic Digital Growth Partners for Modern Enterprises',
+  tagline: 'We build trust',
   subheadline: 'We design and engineer bespoke web platforms, client intake engines, and digital brand experiences that earn long-term trust and accelerate revenue.',
   established: '2026',
   location: 'Indore, India',

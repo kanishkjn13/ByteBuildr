@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 import { ROUTES } from '../constants/routes';
+import { agencyInfo } from '../data/agencyData';
 
 export const Footer: React.FC = () => {
   const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
@@ -42,7 +43,7 @@ export const Footer: React.FC = () => {
                 BYTE BUILD
               </span>
               <span className="text-[7.5px] font-mono tracking-[0.08em] text-[var(--text-tertiary)] uppercase block mt-0.5 font-bold">
-                We Build Trust
+                {agencyInfo.tagline}
               </span>
             </div>
           </Link>

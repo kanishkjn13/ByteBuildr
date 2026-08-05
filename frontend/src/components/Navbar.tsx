@@ -9,6 +9,7 @@ import { Sun, Moon, Mail, Home, Info, Compass, Briefcase } from 'lucide-react';
 import { ROUTES } from '../constants/routes';
 import { useBooking } from '../hooks/useBooking';
 import type { BookingData } from '../types';
+import { agencyInfo } from '../data/agencyData';
 
 interface NavbarProps {
   theme?: 'light' | 'dark';
@@ -70,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   BYTE BUILD
                 </span>
                 <span className="text-[9px] font-mono tracking-[0.22em] text-[var(--accent-primary)] uppercase block mt-1 font-bold">
-                  We Build Trust
+                  {agencyInfo.tagline}
                 </span>
               </div>
             </Link>
