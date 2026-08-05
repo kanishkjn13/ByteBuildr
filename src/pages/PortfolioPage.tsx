@@ -1,0 +1,410 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Lock, Check, ArrowRight, ChevronDown } from 'lucide-react';
+import { SEOHead } from '../seo/SEOHead';
+import { Breadcrumbs } from '../components/common/Breadcrumbs';
+import { useBooking } from '../hooks/useBooking';
+import { useIsMobile } from '../hooks/useIsMobile';
+import { portfolioProjects, agencyInfo } from '../data/agencyData';
+import { TextReveal } from '../components/effects/TextReveal';
+import { GradientText } from '../components/effects/GradientText';
+import { TextHighlighter } from '../components/effects/TextHighlighter';
+import { FinalCTASection } from '../components/sections/FinalCTASection';
+import { BeforeAfterSlider } from '../components/common/BeforeAfterSlider';
+import { PhoneMockupFrame } from '../components/common/PhoneMockupFrame';
+
+interface ExtendedProjectDetail {
+  url: string;
+  category: string;
+  tech: string[];
+  highlights: string[];
+  metrics: { label: string; value: string }[];
+  challenge: string;
+  solution: string;
+}
+
+const projectDetails: Record<string, ExtendedProjectDetail> = {
+  'proj-healthcare': {
+    url: 'https://aura-health.bytebuild.dev',
+    category: 'Healthcare & Medical Tech',
+    tech: ['React 18', 'TypeScript', 'Tailwind', 'REST APIs'],
+    highlights: ['Sub-500ms Instant Patient Intake', '1-Click Calendar Scheduling Sync', '100% Mobile & Desktop Responsive'],
+    metrics: [
+      { label: 'Intake Velocity', value: '-85% Lag' },
+      { label: 'Booking Volume', value: '+280% Appointments' },
+      { label: 'Patient Rating', value: '4.9 Stars' }
+    ],
+    challenge: 'Patient registration took 7+ minutes on legacy PDF/paper intake systems, resulting in form drop-offs.',
+    solution: 'Designed an ultra-responsive, mobile-first patient onboarding web app with auto-save and direct API scheduling.'
+  },
+  'proj-realestate': {
+    url: 'https://apex-estates.bytebuild.dev',
+    category: 'Luxury Real Estate',
+    tech: ['React 18', 'Framer Motion', 'TypeScript', 'Cloudflare CDN'],
+    highlights: ['Interactive 3D Property Previews', 'Instant VIP Inquiry Dispatch', 'High-Resolution Visual Showcase'],
+    metrics: [
+      { label: 'Qualified Inquiries', value: '+340% Lead Gen' },
+      { label: 'Sales Attributed', value: '$18.5M Sales' },
+      { label: 'Core Vitals Speed', value: '99/100 Mobile' }
+    ],
+    challenge: 'High-res image load lag degraded visitor luxury perception. Leads were lost to slow property inquiry response.',
+    solution: 'Engineered a cloud-optimized portal utilizing image CDNs, custom pre-fetching, and direct SMS agent integrations.'
+  },
+  'proj-hospitality': {
+    url: 'https://leclat-gourmet.bytebuild.dev',
+    category: 'Gourmet Hospitality',
+    tech: ['React 18', 'TypeScript', 'Stripe Payments', 'Node.js'],
+    highlights: ['Direct 0-Fee Reservation Engine', 'Digital Culinary Menu Preview', 'Automated Guest SMS Confirmations'],
+    metrics: [
+      { label: 'Stripe Booking Fees', value: '$0 Processing' },
+      { label: 'Table Utilization', value: '+45% Capacity' },
+      { label: 'Monthly Revenue', value: '+$65k Savings' }
+    ],
+    challenge: 'Third-party delivery/booking platforms charged 15-30% commissions on reservations and menu checkouts.',
+    solution: 'Engineered a direct hospitality ordering engine, utilizing local cookies for guest state, Stripe APIs, and custom SMS alerts.'
+  }
+};
+
+export const PortfolioPage: React.FC = () => {
+  const { openBooking } = useBooking();
+  const isMobile = useIsMobile();
+  const [activeProjectIdx, setActiveProjectIdx] = useState(0);
+  const [expandedCaseId, setExpandedCaseId] = useState<string | null>(null);
+
+  const handleProjectScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const index = Math.round(container.scrollLeft / (container.clientWidth - 32));
+    setActiveProjectIdx(Math.min(Math.max(index, 0), portfolioProjects.length - 1));
+  };
+
+  return (
+    <>
+      <SEOHead 
+        title="Featured Portfolio | Byte Build"
+        description="Explore our portfolio of high-performance web applications, client intake engines, and digital platforms."
+      />
+
+      <section className="pt-28 pb-16 min-h-[calc(100vh-80px)] flex flex-col justify-center bg-[var(--bg-primary)] relative overflow-hidden text-left">
+        {/* Ambient Radial Glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-cyan-500/10 via-blue-600/5 to-indigo-600/10 blur-3xl pointer-events-none rounded-full" />
+
+        <div className="container mx-auto space-y-10 relative z-10">
+          
+          <Breadcrumbs />
+
+          {/* 1. Hero Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center max-w-3xl mx-auto space-y-6 pt-4 pb-4"
+          >
+            <div className="inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+              <span>SELECTED PORTFOLIO</span>
+            </div>
+
+            <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--text-primary)] leading-[1.15]">
+              <TextReveal text="Platforms Engineered to" />{' '}
+              <GradientText>Perform.</GradientText>
+            </h1>
+
+            <p className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto">
+              Explore our portfolio of custom websites, booking engines, and digital experiences delivered with measurable results.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+              <button
+                onClick={() => openBooking()}
+                className="neo-btn neo-btn-accent text-xs md:text-sm py-3.5 px-8 shadow-xl w-full sm:w-auto justify-center"
+              >
+                <span>Book Consultation</span>
+              </button>
+            </div>
+          </motion.div>
+
+          {/* 2. Metrics Strip */}
+          <div className="neo-card p-8 md:p-10 border border-[var(--border-light)] rounded-3xl grid grid-cols-2 md:grid-cols-4 gap-6 text-center shadow-lg">
+            {agencyInfo.stats.map((stat, idx) => (
+              <div key={idx} className="space-y-1">
+                <p className="text-2xl md:text-3xl font-extrabold text-[var(--accent-primary)]">{stat.value}</p>
+                <p className="text-xs text-[var(--text-tertiary)]">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* 3. Portfolio Showcase - Staggered Bento Showcase */}
+          <div className="space-y-12 text-left pt-16 md:pt-24">
+            <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
+              <div className="inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+                <span>PROVEN RESULTS</span>
+              </div>
+              <h2 className="text-section-title text-[var(--text-primary)]">
+                <GradientText>Featured Projects</GradientText>
+              </h2>
+              <div className="text-body-lg text-[var(--text-secondary)]">
+                <TextReveal text="Every digital flagship is engineered for" />{' '}
+                <TextHighlighter highlightColor="from-blue-500/40 to-indigo-500/40">
+                  <span className="font-bold text-[var(--text-primary)]">sub-second speed, trust, and audience growth.</span>
+                </TextHighlighter>
+              </div>
+            </div>
+
+            {isMobile ? (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between px-4 text-[11px] font-mono text-[var(--text-tertiary)] uppercase tracking-wider">
+                  <span>Swipe Projects</span>
+                  <span className="text-[var(--accent-primary)] font-bold">3 Cases →</span>
+                </div>
+
+                <div 
+                  onScroll={handleProjectScroll}
+                  className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-6 px-4 pb-6 select-none -webkit-overflow-scrolling-touch"
+                >
+                  {portfolioProjects.map((project) => {
+                    const details = projectDetails[project.id];
+                    const isCaseExpanded = expandedCaseId === project.id;
+
+                    return (
+                      <div
+                        key={project.id}
+                        className="snap-start shrink-0 w-[88vw] max-w-[340px] neo-card p-6 rounded-[32px] border border-[var(--border-light)] shadow-[0_15px_35px_-12px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_45px_-15px_rgba(0,0,0,0.4)] flex flex-col justify-between space-y-6 text-left"
+                      >
+                        <div className="space-y-5">
+                          {/* iPhone Mockup Frame housing Before/After slider */}
+                          <div className="pt-2">
+                            <PhoneMockupFrame>
+                              <BeforeAfterSlider 
+                                afterImage={project.heroImage}
+                                alt={project.title}
+                              />
+                            </PhoneMockupFrame>
+                          </div>
+
+                          {/* Details Metadata */}
+                          <div className="space-y-2">
+                            <span className="text-[10px] font-mono font-bold text-[var(--accent-primary)] uppercase tracking-wider bg-blue-500/10 px-2.5 py-0.5 rounded-md inline-block">
+                              {details.category}
+                            </span>
+                            <h3 className="text-lg font-extrabold text-[var(--text-primary)] leading-tight">
+                              {project.title.split(' • ')[0]}
+                            </h3>
+                            <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-medium">
+                              {project.summary}
+                            </p>
+                          </div>
+
+                          {/* Dynamic Case Study Insights Accordion */}
+                          <div className="pt-1">
+                            <button
+                              onClick={() => setExpandedCaseId(isCaseExpanded ? null : project.id)}
+                              className={`w-full py-2.5 px-4 rounded-xl border border-[var(--border-soft)] bg-[var(--surface-recessed)] text-xs font-bold text-[var(--text-secondary)] flex items-center justify-between transition-colors hover:text-[var(--accent-primary)]`}
+                            >
+                              <span>View Case Insights</span>
+                              <motion.div
+                                animate={{ rotate: isCaseExpanded ? 180 : 0 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                <ChevronDown className="w-4 h-4" />
+                              </motion.div>
+                            </button>
+
+                            <AnimatePresence initial={false}>
+                              {isCaseExpanded && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: 'auto', opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                  className="overflow-hidden pt-3.5 space-y-3.5"
+                                >
+                                  {/* Challenge & Solution */}
+                                  <div className="space-y-2">
+                                    <div>
+                                      <span className="text-[10px] font-mono text-rose-500 uppercase font-extrabold tracking-wider block">Challenge:</span>
+                                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-medium">{details.challenge}</p>
+                                    </div>
+                                    <div>
+                                      <span className="text-[10px] font-mono text-emerald-500 uppercase font-extrabold tracking-wider block">Solution:</span>
+                                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-medium">{details.solution}</p>
+                                    </div>
+                                  </div>
+
+                                  {/* Key metrics grid */}
+                                  <div className="grid grid-cols-3 gap-2 border-t border-[var(--border-subtle)] pt-3 text-center">
+                                    {details.metrics.map((m, mIdx) => (
+                                      <div key={mIdx} className="space-y-0.5 bg-[var(--surface-recessed)] p-2 rounded-xl border border-[var(--border-soft)]">
+                                        <span className="text-[11px] font-extrabold text-[var(--accent-primary)] block leading-none">{m.value}</span>
+                                        <span className="text-[8px] font-mono text-[var(--text-tertiary)] uppercase font-semibold leading-tight block">{m.label}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        </div>
+
+                        {/* CTA button: min-h-[52px], rounded-full, full-width */}
+                        <button
+                          onClick={() => openBooking({ projectOverview: `Inquiring about ${project.title}` })}
+                          className="w-full neo-btn neo-btn-accent text-xs min-h-[52px] rounded-full py-3.5 px-6 font-extrabold justify-center gap-2 shadow-[0_8px_20px_rgba(37,99,235,0.25)]"
+                        >
+                          <span>Book Case Discovery</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Project Swipe Pagination Dots */}
+                <div className="flex justify-center gap-2 pt-2">
+                  {portfolioProjects.map((_, i) => (
+                    <div
+                      key={i}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        activeProjectIdx === i ? 'w-6 bg-[var(--accent-primary)]' : 'w-1.5 bg-[var(--border-soft)]'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              /* Alternating Feature Cards */
+              <div className="space-y-12">
+                {portfolioProjects.map((project, idx) => {
+                  const details = projectDetails[project.id] || {
+                    url: `https://${project.id}.bytebuild.dev`,
+                    category: 'Digital Web Solution',
+                    tech: ['React 18', 'TypeScript', 'Vite'],
+                    highlights: ['Custom Code Architecture', 'Sub-Second Speed', 'Mobile Responsive']
+                  };
+                  const isEven = idx % 2 === 0;
+
+                  return (
+                    <motion.div
+                      key={project.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      className="neo-card p-6 md:p-10 border border-[var(--border-light)] rounded-[28px] section-card group relative overflow-hidden shadow-xl"
+                    >
+                      {/* Soft Background Ambient Glow */}
+                      <div className={`absolute top-1/2 ${isEven ? 'right-0' : 'left-0'} -translate-y-1/2 w-96 h-96 bg-blue-500/10 blur-3xl pointer-events-none rounded-full`} />
+
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+                        {/* Browser Mockup Column */}
+                        <div className={`lg:col-span-7 ${isEven ? 'order-1' : 'order-1 lg:order-2'}`}>
+                          <motion.div 
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ duration: 0.3 }}
+                            className="rounded-2xl overflow-hidden neo-card border border-[var(--border-light)] shadow-2xl bg-slate-950 group/browser"
+                          >
+                            {/* macOS Window Titlebar */}
+                            <div className="bg-slate-900/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-4">
+                              <div className="flex items-center gap-2">
+                                <div className="w-3 h-3 rounded-full bg-rose-500/90 hover:opacity-80 transition-opacity" />
+                                <div className="w-3 h-3 rounded-full bg-amber-500/90 hover:opacity-80 transition-opacity" />
+                                <div className="w-3 h-3 rounded-full bg-emerald-500/90 hover:opacity-80 transition-opacity" />
+                              </div>
+
+                              {/* Fake URL Bar */}
+                              <div className="neo-inset bg-slate-950/80 px-3 py-1 rounded-lg border border-slate-800/80 flex items-center gap-2 text-[11px] font-mono text-slate-400 max-w-xs w-full justify-center">
+                                <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
+                                <span className="truncate">{details.url}</span>
+                              </div>
+
+                              <div className="w-12" />
+                            </div>
+
+                            {/* Showcase Image */}
+                            <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden bg-slate-900">
+                              <img 
+                                src={project.heroImage} 
+                                alt={project.title}
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full h-full object-cover group-hover/browser:scale-105 transition-transform duration-700" 
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent opacity-0 group-hover/browser:opacity-100 transition-opacity duration-300" />
+                            </div>
+                          </motion.div>
+                        </div>
+
+                        {/* Project Information Column */}
+                        <div className={`lg:col-span-5 space-y-6 ${isEven ? 'order-2' : 'order-2 lg:order-1'}`}>
+                          <div className="space-y-3">
+                            <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full text-[11px] font-mono font-bold text-[var(--accent-primary)] uppercase tracking-wider">
+                              <span>{details.category}</span>
+                            </div>
+
+                            <h3 className="text-2xl md:text-3xl font-extrabold text-[var(--text-primary)] leading-tight group-hover:text-[var(--accent-primary)] transition-colors">
+                              {project.title}
+                            </h3>
+
+                            <p className="text-xs md:text-sm text-[var(--text-secondary)] leading-relaxed">
+                              {project.summary}
+                            </p>
+                          </div>
+
+                          {/* Core Highlights */}
+                          <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)]">
+                            <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] font-bold block">
+                              Key Deliverables & Architecture:
+                            </span>
+                            <ul className="space-y-2">
+                              {details.highlights.map((feat, fIdx) => (
+                                <li key={fIdx} className="flex items-center gap-2.5 text-xs text-[var(--text-secondary)]">
+                                  <div className="w-4 h-4 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 shrink-0">
+                                    <Check className="w-3 h-3" />
+                                  </div>
+                                  <span>{feat}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          {/* Tech Badges */}
+                          <div className="pt-2 flex flex-wrap gap-2">
+                            {details.tech.map((t, tIdx) => (
+                              <span key={tIdx} className="neo-inset px-2.5 py-1 rounded-lg text-[10px] font-mono text-[var(--text-secondary)] font-medium">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+
+                          {/* Action Button */}
+                          <div className="pt-3">
+                            <button
+                              onClick={() => openBooking({ projectOverview: `Inquiring about ${project.title}` })}
+                              className="neo-btn neo-btn-accent text-xs py-3 px-6 shadow-md justify-center font-bold gap-2 group/btn"
+                            >
+                              <span>Book Consultation</span>
+                              <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* 4. Final CTA Section */}
+          <FinalCTASection 
+            badgeText="PORTFOLIO INQUIRY"
+            title="Want Similar Growth For Your Business?"
+            subtitlePrefix="Book a 15-minute consultation to discuss your custom website requirements and "
+            highlightText="receive a direct project proposal."
+            primaryBtnText="Book Call"
+            secondaryBtnText="Explore Services"
+            secondaryBtnLink="/services"
+          />
+
+        </div>
+      </section>
+    </>
+  );
+};

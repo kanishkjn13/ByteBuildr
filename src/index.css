@@ -1,0 +1,500 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   ULTRA MINIMALIST UI DESIGN SYSTEM (v7.5)
+   Apple / Linear / Notion / Raycast / Vercel / Resend Aesthetic
+   ========================================================================== */
+
+:root {
+  /* Brand Accent Token */
+  --accent-primary: #2563eb;
+  --accent-hover: #1d4ed8;
+
+  /* Synchronized Neutral Palette */
+  --bg-primary: #fafafa;
+  --surface-card: #ffffff;
+  --surface-recessed: #f3f4f6;
+  --border-soft: #e5e7eb;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+
+  /* Strict Radii Scale */
+  --radius-btn: 12px;
+  --radius-input: 16px;
+  --radius-card: 24px;
+  --radius-hero: 32px;
+  --radius-full: 9999px;
+
+  /* Subtle Soft Elevation */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 20px 40px -10px rgba(37, 99, 235, 0.08);
+
+  /* Typography Scale */
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme='dark'] {
+  --bg-primary: #090d16;
+  --surface-card: #111726;
+  --surface-recessed: #0a0e1a;
+  --border-soft: rgba(255, 255, 255, 0.08);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 20px 40px -10px rgba(37, 99, 235, 0.2);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimal Line Length Reading Constraint */
+.prose-readable {
+  max-width: 65ch;
+}
+
+/* Section Spacing & Viewport Alignment */
+.section-padding-editorial {
+  padding-top: clamp(5rem, 8vw, 8rem);
+  padding-bottom: clamp(5rem, 8vw, 8rem);
+}
+
+/* Fluid Modular Type Scale */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  letter-spacing: -0.04em;
+}
+
+.text-hero {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+}
+
+.text-section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 850;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.text-sub-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.text-card-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.text-body-lg {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: var(--radius-full);
+}
+
+/* Ultra Minimalist Cards */
+.neo-card {
+  background: var(--surface-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.neo-inset {
+  background: var(--surface-recessed);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-input);
+}
+
+.neo-btn {
+  background: var(--surface-card);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-btn);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+}
+
+.neo-btn-accent {
+  background: var(--accent-primary);
+  color: #ffffff !important;
+  border: 1px solid transparent;
+}
+
+.neo-btn-accent:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.neo-pill {
+  background: var(--surface-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-full);
+}
+
+.glow-text {
+  color: var(--accent-primary);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-card {
+  border-radius: var(--radius-hero);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Floating Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--surface-card);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-soft);
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.modal-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Infinite Marquee Track */
+@keyframes marqueeTrack {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeTrack 65s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeTrackReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marqueeTrackReverse 70s linear infinite;
+}
+
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE-SPECIFIC EXPERIENCE OPTIMIZATION (PROMPT 061)
+   Applies ONLY to screens < 768px. Desktop (≥768px) remains locked.
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* Prevent horizontal page overflow on small screens */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Touch-friendly buttons and interactive elements (≥ 48px height) */
+  .neo-btn, 
+  button:not(.neo-pill-sm), 
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"], 
+  input[type="tel"], 
+  input[type="url"], 
+  select, 
+  textarea {
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+
+  /* Prevent iOS automatic zoom on text inputs */
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"], 
+  input[type="tel"], 
+  input[type="url"], 
+  select, 
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Mobile container padding adjustment for 320px-480px viewports */
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Mobile card breathing room */
+  .neo-card {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  /* Responsive section padding for mobile */
+  .section-padding-editorial {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  /* Touch horizontal scroll container for cards */
+  .mobile-swipe-row {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+  }
+  .mobile-swipe-row::-webkit-scrollbar {
+    display: none;
+  }
+  .mobile-swipe-card {
+    scroll-snap-align: start;
+    flex: 0 0 85%;
+    max-width: 85%;
+  }
+}
+
+/* Extra small screen tuning (320px - 375px) */
+@media (max-width: 375px) {
+  .text-hero {
+    font-size: 2.15rem;
+  }
+  .text-section-title {
+    font-size: 1.65rem;
+  }
+  .neo-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+}
+
+/* ==========================================================================
+   TABLET EXPERIENCE OPTIMIZATION (PROMPT 062)
+   Applies ONLY to tablet screens (768px <= width <= 1279px).
+   Desktop (>=1280px) & Mobile (<768px) remain locked.
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 1279px) {
+  /* Tablet Container Padding */
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  /* Tablet Fluid Typography Clamps */
+  .text-hero {
+    font-size: clamp(2.75rem, 4.5vw, 3.75rem);
+    line-height: 1.12;
+  }
+
+  .text-section-title {
+    font-size: clamp(2.15rem, 3.2vw, 2.6rem);
+    line-height: 1.18;
+  }
+
+  .text-sub-heading {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+  }
+
+  /* Tablet Section Breathing Room */
+  .section-padding-editorial {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  /* Tablet Card Padding & Border Radius */
+  .neo-card {
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  /* Responsive 2-column grid helper for tablet viewports */
+  .tablet-grid-2col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  /* Tablet Table Overflow Handling */
+  .tablet-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 20px;
+  }
+}
+
+/* ==========================================================================
+   CROSS-BROWSER & WCAG 2.2 AA ACCESSIBILITY PRODUCTION QA (PROMPT 063)
+   ========================================================================== */
+
+/* WebKit Tap Highlight & Safari Smooth Scrolling */
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Safari -webkit-backdrop-filter compatibility fallback */
+.backdrop-blur-md,
+.backdrop-blur-xl,
+.backdrop-blur-2xl {
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* WCAG 2.2 AA Keyboard Navigation Focus Ring Indicators */
+:focus-visible {
+  outline: 2px solid var(--accent-primary) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25) !important;
+}
+
+/* Disable focus ring when clicking with mouse/touch */
+:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Ultrawide Monitor Layout Safeguard */
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+
+/* ==========================================================================
+   TOUCH GESTURES & MOBILE TACTILE FEEDBACK (v8.0)
+   ========================================================================== */
+@media (hover: none) {
+  /* Override hover styles for touch devices to prevent sticky hover states */
+  .neo-card:hover {
+    transform: none !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+  
+  .neo-btn:hover,
+  .neo-btn-accent:hover {
+    transform: none !important;
+    background: inherit !important;
+  }
+
+  /* Tactile touch active compress & glow feedback */
+  .neo-card:active {
+    transform: scale(0.97) translateY(-2px) !important;
+    box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.16) !important;
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease !important;
+  }
+
+  .neo-btn:active {
+    transform: scale(0.96) !important;
+    background-color: var(--surface-recessed) !important;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.15) !important;
+    transition: transform 0.1s ease, background-color 0.1s ease !important;
+  }
+
+  .neo-btn-accent:active {
+    transform: scale(0.96) !important;
+    background-color: var(--accent-hover) !important;
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.4) !important;
+    transition: transform 0.1s ease, background-color 0.1s ease !important;
+  }
+
+  /* Ensure elastic momentum scrolling is forced on scrollable containers */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+}

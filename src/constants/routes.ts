@@ -1,0 +1,18 @@
+export const ROUTES = {
+  HOME: '/',
+  ABOUT: '/about',
+  SERVICES: '/services',
+  PORTFOLIO: '/portfolio',
+  PORTFOLIO_DETAIL: '/portfolio',
+  PRICING: '/contact',
+  CONTACT: '/contact',
+  BOOK_CONSULTATION: '/contact',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
+  VERIFY_EMAIL: '/verify-email',
+  UNAUTHORIZED: '/unauthorized',
+  PORTAL: '/portal',
+  ADMIN: '/admin',
+} as const;
