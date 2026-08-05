@@ -43,7 +43,7 @@ export const Testimonials: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="py-16 md:py-24 relative bg-[var(--bg-primary)] overflow-hidden">
+    <section id="testimonials" className="hidden md:block py-24 relative bg-[var(--bg-primary)] overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 blur-3xl pointer-events-none rounded-full" />
 

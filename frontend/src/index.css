@@ -33,7 +33,7 @@
   --shadow-card-hover: 0 20px 40px -10px rgba(37, 99, 235, 0.08);
 
   /* Typography Scale */
-  --font-heading: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Instrument Serif', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -78,40 +78,59 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   color: var(--text-primary);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.01em;
 }
 
 .text-hero {
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+  font-size: clamp(2.6rem, 5.2vw, 4.75rem);
   font-weight: 900;
   line-height: 1.05;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.015em;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+}
+
+.text-hero-home {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 4.8vw, 4.3rem);
+  font-weight: 900;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .text-hero-home {
+    transform: scaleY(1.22);
+    transform-origin: left top;
+    margin-bottom: 2.2rem;
+  }
 }
 
 .text-section-title {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-size: clamp(2.75rem, 5vw, 4.5rem);
   font-weight: 850;
   line-height: 1.1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.01em;
 }
 
 .text-sub-heading {
   font-family: var(--font-heading);
-  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-size: clamp(1.75rem, 3vw, 2.6rem);
   font-weight: 750;
   line-height: 1.25;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.005em;
 }
 
 .text-card-heading {
   font-family: var(--font-heading);
-  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
   font-weight: 700;
   line-height: 1.25;
-  letter-spacing: -0.02em;
+  letter-spacing: 0em;
 }
 
 .text-body-lg {

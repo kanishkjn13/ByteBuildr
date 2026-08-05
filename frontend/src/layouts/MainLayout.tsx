@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { ConsultationModal } from '../components/ConsultationModal';
@@ -17,40 +16,11 @@ export const MainLayout: React.FC = () => {
   const { isOpen, initialData, openBooking, closeBooking } = useBooking();
   const location = useLocation();
   const isMobile = useIsMobile();
-  const [showFab, setShowFab] = useState<boolean>(false);
-  const [isFabCollapsed, setIsFabCollapsed] = useState<boolean>(false);
-  const lastScrollY = useRef<number>(0);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('bytebuild_theme', theme);
   }, [theme]);
-
-  // Mobile scroll listener for FAB adaptive collapse
-  useEffect(() => {
-    if (!isMobile) {
-      setShowFab(false);
-      return;
-    }
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > 350) {
-        setShowFab(true);
-      } else {
-        setShowFab(false);
-      }
-      
-      if (currentScrollY > lastScrollY.current && currentScrollY > 400) {
-        setIsFabCollapsed(true);
-      } else if (currentScrollY < lastScrollY.current) {
-        setIsFabCollapsed(false);
-      }
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile]);
 
   // Lenis Smooth Scroll Engine
   useEffect(() => {
@@ -97,7 +67,7 @@ export const MainLayout: React.FC = () => {
       />
 
       {/* Main Page Outlet with Route Transitions */}
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className="flex-1 pb-24 md:pb-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
@@ -125,26 +95,7 @@ export const MainLayout: React.FC = () => {
         initialData={initialData}
       />
 
-      {/* Floating Action Button (FAB) on mobile viewports */}
-      <AnimatePresence>
-        {isMobile && showFab && (
-          <motion.button
-            initial={{ opacity: 0, y: 30, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.8 }}
-            transition={{ type: 'spring', damping: 22, stiffness: 260 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => openBooking()}
-            className="fixed bottom-6 left-6 z-40 bg-[var(--accent-primary)] text-white shadow-2xl flex items-center justify-center border border-blue-400/20 select-none pointer-events-auto h-12 rounded-full font-extrabold text-xs"
-            style={{ width: isFabCollapsed ? '48px' : '140px', transition: 'width 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }}
-          >
-            <div className="flex items-center gap-2 px-3 overflow-hidden">
-              <Calendar className="w-4 h-4 shrink-0" />
-              {!isFabCollapsed && <span className="truncate">Book Strategy</span>}
-            </div>
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {/* Floating Action Button (FAB) on mobile viewports - Disabled to prevent overlap with bottom navigation */}
 
     </div>
   );

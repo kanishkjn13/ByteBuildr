@@ -38,8 +38,10 @@ export const HomePage: React.FC = () => {
           onNavigateToCalculator={handleNavigateToServices}
         />
 
-        {/* Section 2: Trust */}
-        <TrustStrip />
+        {/* Section 2: Trust (Desktop Only, since Mobile is inline inside Hero) */}
+        <div className="hidden md:block">
+          <TrustStrip />
+        </div>
 
         {/* Section 3: Services */}
         <ServicesGrid

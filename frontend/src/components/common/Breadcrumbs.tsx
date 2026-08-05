@@ -10,7 +10,7 @@ export const Breadcrumbs: React.FC = () => {
   if (pathnames.length === 0) return null;
 
   return (
-    <nav aria-label="Breadcrumb" className="py-3 px-4 neo-card border border-[var(--border-light)] inline-flex items-center gap-2 rounded-full text-xs text-[var(--text-secondary)] mb-6">
+    <nav aria-label="Breadcrumb" className="hidden md:inline-flex py-3 px-4 neo-card border border-[var(--border-light)] items-center gap-2 rounded-full text-xs text-[var(--text-secondary)] mb-6">
       <Link to={ROUTES.HOME} className="hover:text-[var(--accent-primary)] flex items-center gap-1">
         <Home className="w-3.5 h-3.5" />
         <span>Home</span>

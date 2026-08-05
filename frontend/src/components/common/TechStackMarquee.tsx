@@ -59,11 +59,11 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
   const marqueeRow2 = [...row2, ...row2, ...row2, ...row2];
 
   return (
-    <section className="py-16 relative bg-[var(--bg-primary)] overflow-hidden select-none">
+    <section className="py-8 md:py-16 relative bg-[var(--bg-primary)] overflow-hidden select-none">
       
       {showHeaders && (
         <div className="container mx-auto text-center max-w-3xl mb-12 space-y-3 px-4">
-          <div className="inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+          <div className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
             <Cpu className="w-4 h-4" />
             <span>{badgeText}</span>
           </div>
@@ -82,10 +82,10 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
       <div className="relative space-y-5">
         
         {/* Left Ambient Fade Mask */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-28 md:w-48 bg-gradient-to-r from-[var(--bg-primary)] via-[var(--bg-primary)]/80 to-transparent z-20" />
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 md:w-48 bg-gradient-to-r from-[var(--bg-primary)] via-[var(--bg-primary)]/80 to-transparent z-20" />
 
         {/* Right Ambient Fade Mask */}
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-28 md:w-48 bg-gradient-to-l from-[var(--bg-primary)] via-[var(--bg-primary)]/80 to-transparent z-20" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 md:w-48 bg-gradient-to-l from-[var(--bg-primary)] via-[var(--bg-primary)]/80 to-transparent z-20" />
 
         {/* Track 1: Scroll Left */}
         <div className="flex overflow-hidden">

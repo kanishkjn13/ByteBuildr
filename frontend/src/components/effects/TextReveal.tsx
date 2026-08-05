@@ -40,10 +40,10 @@ export const TextReveal: React.FC<TextRevealProps> = ({ text, className = '', de
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-50px' }}
-      className={`inline-flex flex-wrap gap-x-[0.25em] ${className}`}
+      className={`inline ${className}`}
     >
       {words.map((word, index) => (
-        <motion.span key={index} variants={wordVariants} className="inline-block">
+        <motion.span key={index} variants={wordVariants} className="inline-block mr-[0.25em]">
           {word}
         </motion.span>
       ))}

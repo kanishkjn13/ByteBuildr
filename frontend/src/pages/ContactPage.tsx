@@ -131,11 +131,11 @@ export const ContactPage: React.FC = () => {
         description="Get in touch with Byte Build. Send us a message with your contact information and our team will reach out to you within 12 hours."
       />
 
-      <section className="pt-28 pb-16 min-h-[calc(100vh-80px)] flex flex-col justify-center bg-[var(--bg-primary)] relative overflow-hidden text-left">
+      <section className="min-h-0 md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-20 pb-6 md:pb-16 bg-[var(--bg-primary)] relative overflow-hidden text-left">
         {/* Ambient Radial Background Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-blue-600/10 via-indigo-500/5 to-cyan-500/10 blur-3xl pointer-events-none rounded-full" />
 
-        <div className="container mx-auto space-y-10 relative z-10">
+        <div className="container mx-auto space-y-6 md:space-y-10 relative z-10 px-4">
           
           <Breadcrumbs />
 
@@ -143,22 +143,21 @@ export const ContactPage: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto space-y-6 pt-2 pb-2"
+            className="text-center max-w-3xl mx-auto space-y-4 md:space-y-6 pt-2 pb-2"
           >
-            <div className="inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+            <div className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
               <span>GET IN TOUCH</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--text-primary)] leading-[1.15]">
+            <h1 className="text-hero text-[var(--text-primary)] leading-[1.1]">
               <TextReveal text="We'd Love to Hear From" />{' '}
               <GradientText>You.</GradientText>
             </h1>
 
             <p className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto">
-              <TextReveal text="Please share your details below. Our senior team will review your message and" />
-              <br className="hidden sm:inline" />
+              <TextReveal text="Please share your details below. Our senior team will review your message and reach out to you" />{' '}
               <TextHighlighter highlightColor="from-cyan-500/40 to-blue-500/40">
-                <span className="font-bold text-[var(--text-primary)]">reach out to you within 12 hours.</span>
+                <span className="font-bold text-[var(--text-primary)]">within 12 hours.</span>
               </TextHighlighter>
             </p>
           </motion.div>
@@ -170,10 +169,10 @@ export const ContactPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className={`neo-card border border-[var(--border-light)] shadow-2xl relative overflow-hidden text-left ${
-                isMobile ? 'p-8 rounded-[32px]' : 'p-6 sm:p-10 rounded-[28px]'
+                isMobile ? 'p-5 rounded-[24px]' : 'p-6 sm:p-10 rounded-[28px]'
               }`}
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[var(--border-subtle)] pb-6 mb-8 gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[var(--border-subtle)] pb-4 md:pb-6 mb-4 md:mb-8 gap-3 md:gap-4">
                 <div>
                   <span className="text-[11px] font-mono font-bold text-[var(--accent-primary)] uppercase tracking-wider block">
                     CONTACT INFORMATION
@@ -193,7 +192,7 @@ export const ContactPage: React.FC = () => {
                   animate={isShaking ? { x: [-6, 6, -6, 6, 0] } : {}}
                   transition={{ duration: 0.35 }}
                 >
-                  <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                  <form onSubmit={handleSubmit} noValidate className="space-y-4 md:space-y-6">
                   
                   {/* Full Name */}
                   <div className="space-y-2">
@@ -359,8 +358,8 @@ export const ContactPage: React.FC = () => {
                         onChange={e => handleChange('message', e.target.value)}
                         onBlur={() => handleBlur('message')}
                         placeholder="How can we help you? Tell us about your project ideas (Min 10 characters)..."
-                        className={`w-full pl-11 pr-4 py-3 text-xs md:text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-primary)] border-2 rounded-xl shadow-sm focus:outline-none transition-all leading-relaxed placeholder-[var(--text-tertiary)] ${
-                          isMobile ? 'min-h-[100px] rounded-2xl text-base' : ''
+                        className={`w-full pl-11 pr-4 py-3 font-medium text-[var(--text-primary)] bg-[var(--bg-primary)] border-2 rounded-xl shadow-sm focus:outline-none transition-all leading-relaxed placeholder-[var(--text-tertiary)] ${
+                          isMobile ? 'min-h-[100px] rounded-2xl text-base' : 'text-xs md:text-sm'
                         } ${
                           touched.message && errors.message 
                             ? 'border-rose-500/80 ring-4 ring-rose-500/10' 
@@ -388,9 +387,9 @@ export const ContactPage: React.FC = () => {
                       <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
 
-                    <p className="text-[11px] text-[var(--text-tertiary)] text-center flex items-center justify-center gap-1.5">
-                      <Lock className="w-3 h-3 text-emerald-500 shrink-0" />
-                      <span>Your information is kept 100% confidential. No spam ever.</span>
+                    <p className="text-[10px] sm:text-[11px] text-[var(--text-tertiary)] text-center max-w-xs mx-auto leading-relaxed">
+                      <Lock className="w-3 h-3 text-emerald-500 inline-block mr-1.5 align-middle -mt-0.5" />
+                      <span className="align-middle">Your info is 100% confidential. No spam ever.</span>
                     </p>
                   </div>
 
@@ -441,10 +440,14 @@ export const ContactPage: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* 3. Direct Agency Information & Response Protocol Section */}
-          <div className="pt-16 md:pt-24 space-y-12 max-w-5xl mx-auto">
+        </div>
+      </section>
+
+      {/* 2. Direct Agency Information & Response Protocol Section */}
+      <section className="pt-4 pb-16 md:py-16 bg-[var(--bg-primary)] text-left relative overflow-hidden">
+        <div className="container mx-auto px-4 space-y-12 max-w-5xl relative z-10">
             <div className="text-center space-y-3">
-              <div className="inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+              <div className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>AGENCY DIRECTORY</span>
               </div>
@@ -507,7 +510,7 @@ export const ContactPage: React.FC = () => {
             </div>
 
             {/* What Happens Next - 3-Step Process */}
-            <div className="neo-card p-8 md:p-10 rounded-[28px] border border-[var(--border-light)] text-left space-y-6">
+            <div className="neo-card p-5 md:p-10 rounded-3xl border border-[var(--border-light)] text-left space-y-6">
               <div className="border-b border-[var(--border-subtle)] pb-4 flex items-center justify-between">
                 <div>
                   <span className="text-[11px] font-mono font-bold text-[var(--accent-primary)] uppercase tracking-wider block">
@@ -522,42 +525,69 @@ export const ContactPage: React.FC = () => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 font-mono text-xs font-black text-[var(--accent-primary)]">
-                    <span className="w-6 h-6 rounded-lg neo-inset flex items-center justify-center">01</span>
-                    <span>Inquiry Review</span>
-                  </div>
-                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                    Our Senior Web Architect conducts an initial review of your project ideas, requirements, and technical scope within 4 hours.
-                  </p>
-                </div>
+              <div className="relative">
+                {/* Mobile vertical line connector */}
+                <div className="absolute left-[15px] top-[20px] bottom-[20px] w-0.5 bg-gradient-to-b from-[var(--accent-primary)]/80 via-blue-500/40 to-cyan-500/10 md:hidden pointer-events-none" />
 
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 font-mono text-xs font-black text-[var(--accent-primary)]">
-                    <span className="w-6 h-6 rounded-lg neo-inset flex items-center justify-center">02</span>
-                    <span>Custom Proposal</span>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+                  {/* Step 1 */}
+                  <div className="relative pl-10 md:pl-0 flex flex-col space-y-2 text-left">
+                    {/* Node */}
+                    <div className="absolute left-0 top-0 md:relative md:left-auto md:top-auto flex items-center gap-2 font-mono text-xs font-black text-[var(--accent-primary)]">
+                      <span className="w-8 h-8 md:w-6 md:h-6 rounded-full md:rounded-lg bg-[var(--surface-recessed)] md:bg-transparent neo-inset md:shadow-none flex items-center justify-center text-xs md:text-[10px] border border-[var(--border-light)] md:border-none">
+                        01
+                      </span>
+                      <span className="hidden md:inline">Inquiry Review</span>
+                    </div>
+                    {/* Mobile Title */}
+                    <div className="md:hidden font-mono text-xs font-black text-[var(--accent-primary)] -mt-1 pb-1">
+                      Inquiry Review
+                    </div>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      Our Senior Web Architect conducts an initial review of your project ideas, requirements, and technical scope within 4 hours.
+                    </p>
                   </div>
-                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                    We generate an itemized project proposal including deliverables, timeline estimates, and a transparent pricing quote.
-                  </p>
-                </div>
 
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 font-mono text-xs font-black text-[var(--accent-primary)]">
-                    <span className="w-6 h-6 rounded-lg neo-inset flex items-center justify-center">03</span>
-                    <span>Kickoff Alignment</span>
+                  {/* Step 2 */}
+                  <div className="relative pl-10 md:pl-0 flex flex-col space-y-2 text-left">
+                    {/* Node */}
+                    <div className="absolute left-0 top-0 md:relative md:left-auto md:top-auto flex items-center gap-2 font-mono text-xs font-black text-[var(--accent-primary)]">
+                      <span className="w-8 h-8 md:w-6 md:h-6 rounded-full md:rounded-lg bg-[var(--surface-recessed)] md:bg-transparent neo-inset md:shadow-none flex items-center justify-center text-xs md:text-[10px] border border-[var(--border-light)] md:border-none">
+                        02
+                      </span>
+                      <span className="hidden md:inline">Custom Proposal</span>
+                    </div>
+                    {/* Mobile Title */}
+                    <div className="md:hidden font-mono text-xs font-black text-[var(--accent-primary)] -mt-1 pb-1">
+                      Custom Proposal
+                    </div>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      We generate an itemized project proposal including deliverables, timeline estimates, and a transparent pricing quote.
+                    </p>
                   </div>
-                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                    We schedule a brief 15-minute alignment call to confirm key milestone dates, answer questions, and begin development.
-                  </p>
+
+                  {/* Step 3 */}
+                  <div className="relative pl-10 md:pl-0 flex flex-col space-y-2 text-left">
+                    {/* Node */}
+                    <div className="absolute left-0 top-0 md:relative md:left-auto md:top-auto flex items-center gap-2 font-mono text-xs font-black text-[var(--accent-primary)]">
+                      <span className="w-8 h-8 md:w-6 md:h-6 rounded-full md:rounded-lg bg-[var(--surface-recessed)] md:bg-transparent neo-inset md:shadow-none flex items-center justify-center text-xs md:text-[10px] border border-[var(--border-light)] md:border-none">
+                        03
+                      </span>
+                      <span className="hidden md:inline">Kickoff Alignment</span>
+                    </div>
+                    {/* Mobile Title */}
+                    <div className="md:hidden font-mono text-xs font-black text-[var(--accent-primary)] -mt-1 pb-1">
+                      Kickoff Alignment
+                    </div>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      We schedule a brief 15-minute alignment call to confirm key milestone dates, answer questions, and begin development.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-        </div>
-      </section>
+        </section>
     </>
   );
 };

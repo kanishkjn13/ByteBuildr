@@ -31,7 +31,7 @@ export const FinalCTASection: React.FC<FinalCTASectionProps> = ({
   const isMobile = useIsMobile();
 
   return (
-    <section className="py-16 relative bg-[var(--bg-primary)] text-left">
+    <section className="pt-4 pb-4 md:py-24 relative bg-[var(--bg-primary)] text-left">
       <div className="container mx-auto">
         
         {isMobile ? (
@@ -46,7 +46,7 @@ export const FinalCTASection: React.FC<FinalCTASectionProps> = ({
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-500/10 blur-3xl pointer-events-none rounded-full" />
 
             <div className="relative z-10 space-y-5">
-              <div className="inline-flex items-center gap-2 neo-pill px-4 py-1.5 text-[10px] uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+              <div className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-1.5 text-[10px] uppercase tracking-widest text-[var(--accent-primary)] font-bold">
                 <span>{badgeText}</span>
               </div>
 

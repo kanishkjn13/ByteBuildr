@@ -11,6 +11,13 @@ interface ServicesGridProps {
 
 export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenBookingWithService }) => {
   const [expandedServiceId, setExpandedServiceId] = useState<string | null>(null);
+  const [activeServiceIdx, setActiveServiceIdx] = useState<number>(0);
+
+  const handleServicesScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const index = Math.round(container.scrollLeft / (container.clientWidth - 40));
+    setActiveServiceIdx(index);
+  };
   const premiumServices = [
     {
       id: 'service-custom-web-apps',
@@ -47,7 +54,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenBookingWithSer
   ];
 
   return (
-    <section id="services" className="py-16 md:py-24 relative bg-[var(--bg-primary)]">
+    <section id="services" className="pt-8 pb-4 md:py-24 relative bg-[var(--bg-primary)]">
       <div className="container mx-auto space-y-12 md:space-y-16">
         
         {/* Section Header */}
@@ -95,7 +102,10 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenBookingWithSer
             <span className="text-[var(--accent-primary)] font-bold">4 Active Specs</span>
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div 
+            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-6 px-4 pb-6 select-none -webkit-overflow-scrolling-touch -mx-4"
+            onScroll={handleServicesScroll}
+          >
             {premiumServices.map((service) => {
               const Icon = service.icon;
               const isExpanded = expandedServiceId === service.id;
@@ -108,7 +118,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenBookingWithSer
                     show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', damping: 25, stiffness: 180 } }
                   }}
                   onClick={() => setExpandedServiceId(isExpanded ? null : service.id)}
-                  className={`neo-card p-8 rounded-[32px] border transition-all duration-300 flex flex-col justify-between space-y-6 text-left relative overflow-hidden cursor-pointer ${
+                  className={`neo-card p-8 rounded-[32px] border transition-all duration-300 flex flex-col justify-between space-y-6 text-left relative overflow-hidden cursor-pointer snap-center shrink-0 w-[90vw] max-w-[340px] ${
                     isExpanded ? 'border-[var(--accent-primary)] ring-2 ring-blue-500/10' : 'border-[var(--border-light)]'
                   }`}
                 >
@@ -179,6 +189,18 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenBookingWithSer
                 </motion.div>
               );
             })}
+          </div>
+
+          {/* Swipable Progress Dot Indicators (Mobile Only) */}
+          <div className="flex items-center justify-center gap-1.5 pt-3">
+            {premiumServices.map((_, idx) => (
+              <div
+                key={idx}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  activeServiceIdx === idx ? 'w-4.5 bg-[var(--accent-primary)]' : 'w-1.5 bg-[var(--border-light)]'
+                }`}
+              />
+            ))}
           </div>
         </motion.div>
 

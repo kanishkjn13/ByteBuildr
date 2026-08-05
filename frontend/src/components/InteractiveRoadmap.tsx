@@ -172,7 +172,7 @@ export const InteractiveRoadmap: React.FC = () => {
   ];
 
   return (
-    <section ref={containerRef} id="process" className="py-24 relative bg-[var(--bg-primary)] overflow-hidden text-left">
+    <section ref={containerRef} id="process" className="pt-4 pb-24 md:py-24 relative bg-[var(--bg-primary)] overflow-hidden text-left">
       
       {/* Background Soft Lighting & Grid */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-tr from-blue-500/10 via-cyan-500/5 to-purple-500/10 blur-3xl pointer-events-none rounded-full" />
@@ -321,13 +321,13 @@ export const InteractiveRoadmap: React.FC = () => {
         </div>
 
         {/* Mobile Vertical Animated Journey Roadmap (<768px) */}
-        <div className="block md:hidden relative space-y-10 pl-7 text-left my-4">
+        <div className="block md:hidden relative space-y-10 pl-12 text-left my-4">
           
           {/* Mobile Vertical Scroll Line Track */}
-          <div className="absolute left-[19px] top-4 bottom-4 w-0.5 bg-[var(--border-soft)] rounded-full" />
+          <div className="absolute left-[23px] top-4 bottom-4 w-0.5 bg-[var(--border-soft)] rounded-full" />
           <motion.div
             style={{ scaleY: smoothProgress }}
-            className="absolute left-[19px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-cyan-400 rounded-full origin-top"
+            className="absolute left-[23px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-cyan-400 rounded-full origin-top"
           />
 
           {milestones.map((m, index) => {
@@ -344,7 +344,7 @@ export const InteractiveRoadmap: React.FC = () => {
                 className="relative space-y-2 select-none"
               >
                 {/* Node Icon Badge on Mobile Vertical Line */}
-                <div className="absolute -left-[41px] top-1 w-10 h-10 rounded-full neo-card border-2 border-[var(--accent-primary)] flex items-center justify-center bg-[var(--bg-primary)] shadow-md z-10">
+                <div className="absolute -left-[45px] top-[22px] w-10 h-10 rounded-full neo-card border-2 border-[var(--accent-primary)] flex items-center justify-center bg-[var(--bg-primary)] shadow-md z-10">
                   <IconComponent className="w-4 h-4 text-[var(--accent-primary)] shrink-0" />
                 </div>
 

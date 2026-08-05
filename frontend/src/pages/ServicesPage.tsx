@@ -23,6 +23,13 @@ import { FinalCTASection } from '../components/sections/FinalCTASection';
 
 export const ServicesPage: React.FC = () => {
   const { openBooking } = useBooking();
+  const [activeCoreServiceIdx, setActiveCoreServiceIdx] = React.useState<number>(0);
+
+  const handleCoreServicesScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const index = Math.round(container.scrollLeft / (container.clientWidth - 40));
+    setActiveCoreServiceIdx(index);
+  };
 
   // Minimal 4 Core Services for a Fresher / Modern Agency
   const coreServices = [
@@ -122,7 +129,7 @@ export const ServicesPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 1. STANDALONE HERO SECTION (Fills 100% of Viewport Above-The-Fold)        */}
       {/* ========================================================================= */}
-      <section className="min-h-[calc(100vh-80px)] flex flex-col justify-center pt-28 pb-16 bg-[var(--bg-primary)] text-left relative overflow-hidden">
+      <section className="min-h-[calc(100vh-60px)] flex flex-col justify-center pt-16 pb-16 md:min-h-[calc(100vh-80px)] md:pt-28 md:pb-16 bg-[var(--bg-primary)] text-left relative overflow-hidden">
         {/* Subtle Ambient Background Glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 blur-3xl pointer-events-none rounded-full" />
 
@@ -136,7 +143,7 @@ export const ServicesPage: React.FC = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 neo-pill px-4 py-1.5 text-xs font-semibold text-[var(--accent-primary)] uppercase tracking-wider"
+              className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-1.5 text-xs font-semibold text-[var(--accent-primary)] uppercase tracking-wider"
             >
               <span>FRESH & FOCUSED WEB AGENCY</span>
             </motion.div>
@@ -145,7 +152,7 @@ export const ServicesPage: React.FC = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.4 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight"
+              className="text-hero text-[var(--text-primary)] leading-[1.1]"
             >
               Simple, High-Impact Services for <GradientText>Your Online Presence</GradientText>
             </motion.h1>
@@ -156,10 +163,10 @@ export const ServicesPage: React.FC = () => {
               transition={{ delay: 0.2, duration: 0.4 }}
               className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto"
             >
-              <TextReveal text="We craft clean, fast, and modern websites that help your business look professional and" />
+              <TextReveal text="We craft clean, fast, and modern websites that help your business look professional, turn visitors into real clients, and avoid complex jargon—" />
               <br className="hidden sm:inline" />
               <TextHighlighter highlightColor="from-cyan-500/40 to-blue-500/40">
-                <span className="font-bold text-[var(--text-primary)]">turn visitors into real clients. No complex jargon—just great work.</span>
+                <span className="font-bold text-[var(--text-primary)]">just great work.</span>
               </TextHighlighter>
             </motion.p>
 
@@ -193,13 +200,13 @@ export const ServicesPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 2. BODY SERVICES SECTION (Revealed Strictly AFTER Scrolling Down)          */}
       {/* ========================================================================= */}
-      <section className="pt-16 md:pt-24 pb-24 bg-[var(--bg-primary)] text-left relative overflow-hidden">
-        <div className="container mx-auto space-y-20 relative z-10 px-4 max-w-6xl">
+      <section className="pt-4 md:pt-24 pb-12 md:pb-24 bg-[var(--bg-primary)] text-left relative overflow-hidden">
+        <div className="container mx-auto space-y-12 md:space-y-20 relative z-10 px-4 max-w-6xl">
 
           {/* 2. Minimal 4 Core Services Grid */}
           <div id="services-grid" className="space-y-8">
             <div className="text-center space-y-2 max-w-2xl mx-auto">
-              <div className="inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+              <div className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
                 <span>OUR SERVICES</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--text-primary)]">
@@ -208,7 +215,8 @@ export const ServicesPage: React.FC = () => {
               <p className="text-xs text-[var(--text-secondary)]">Focused web solutions designed to get your business online quickly and effectively.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Desktop View (grid layout) */}
+            <div className="hidden md:grid grid-cols-2 gap-6">
               {coreServices.map((service, idx) => {
                 const Icon = service.icon;
                 return (
@@ -266,12 +274,90 @@ export const ServicesPage: React.FC = () => {
                 );
               })}
             </div>
+
+            {/* Mobile View (swipable carousel layout) */}
+            <div className="block md:hidden space-y-6">
+              <div 
+                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-6 px-4 pb-6 select-none -webkit-overflow-scrolling-touch -mx-4"
+                onScroll={handleCoreServicesScroll}
+              >
+                {coreServices.map((service, idx) => {
+                  const Icon = service.icon;
+                  return (
+                    <motion.div
+                      key={service.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.08, duration: 0.4 }}
+                      className="neo-card p-6 border border-[var(--border-light)] rounded-2xl flex flex-col justify-between space-y-6 section-card snap-center shrink-0 w-[90vw] max-w-[340px]"
+                    >
+                      <div className="space-y-4">
+                        <div className="w-11 h-11 rounded-xl neo-inset flex items-center justify-center text-[var(--accent-primary)]">
+                          <Icon className="w-5 h-5" />
+                        </div>
+
+                        {/* Title & Summary */}
+                        <div>
+                          <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">
+                            {service.title}
+                          </h3>
+                          <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                            {service.summary}
+                          </p>
+                        </div>
+
+                        {/* Features Checklist */}
+                        <div className="pt-2 space-y-2 border-t border-[var(--border-subtle)]">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] font-bold block">
+                            What's Included:
+                          </span>
+                          <ul className="space-y-1.5">
+                            {service.features.map((feat, fIdx) => (
+                              <li key={fIdx} className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
+                                <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* Action button */}
+                      <div className="pt-4">
+                        <button
+                          onClick={() => openBooking()}
+                          className="w-full neo-btn text-xs min-h-[52px] rounded-full py-3.5 px-6 justify-between text-[var(--text-primary)] font-extrabold"
+                        >
+                          <span>Request This Service</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
+                        </button>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Indicator Dots */}
+              <div className="flex justify-center gap-1.5 pt-2">
+                {coreServices.map((_, idx) => (
+                  <div 
+                    key={idx}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      idx === activeCoreServiceIdx 
+                        ? 'w-5 bg-[var(--accent-primary)]' 
+                        : 'w-1.5 bg-[var(--border-light)]'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* 3. Simple Process Timeline */}
           <div className="space-y-8">
             <div className="text-center space-y-2 max-w-2xl mx-auto">
-              <div className="inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+              <div className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
                 <span>OUR PROCESS</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--text-primary)]">
@@ -280,6 +366,7 @@ export const ServicesPage: React.FC = () => {
               <p className="text-xs text-[var(--text-secondary)]">A clear 4-step workflow to turn your ideas into a finished website.</p>
             </div>
 
+            {/* Desktop View (4-column grid layout) */}
             <motion.div 
               initial="hidden"
               whileInView="show"
@@ -288,7 +375,7 @@ export const ServicesPage: React.FC = () => {
                 hidden: {},
                 show: { transition: { staggerChildren: 0.1 } }
               }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+              className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4"
             >
               {simpleProcess.map((proc) => {
                 const Icon = proc.icon;
@@ -326,29 +413,81 @@ export const ServicesPage: React.FC = () => {
                 );
               })}
             </motion.div>
-          </div>
 
-          {/* 4. Tech Stack Marquee */}
-          <div className="space-y-6 text-center pt-4 border-t border-[var(--border-subtle)]">
-            <span className="text-xs font-mono text-[var(--text-tertiary)] uppercase tracking-wider font-semibold block">
-              Modern Tech Built For Speed & Security
-            </span>
-            <TechStackMarquee />
-          </div>
+            {/* Mobile View (Premium Interactive Vertical Timeline Layout) */}
+            <div className="block md:hidden relative pl-8 space-y-10">
+              {/* Vertical timeline line */}
+              <div className="absolute left-[17px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-[var(--accent-primary)] via-blue-500/50 to-[var(--border-light)]" />
 
-          {/* 5. Final CTA Banner */}
-          <FinalCTASection 
-            badgeText="READY TO BUILD?"
-            title="Let's Build Something Great Together"
-            subtitlePrefix="Get in touch today for a free consultation or quick estimate for your "
-            highlightText="custom web development project."
-            primaryBtnText="Discuss Your Project"
-            secondaryBtnText="Explore Portfolio"
-            secondaryBtnLink={ROUTES.PORTFOLIO}
-          />
+              {simpleProcess.map((proc, idx) => {
+                const Icon = proc.icon;
+                return (
+                  <motion.div
+                    key={proc.step}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1, duration: 0.5 }}
+                    className="relative space-y-3"
+                  >
+                    {/* Timeline Node Bubble */}
+                    <div className="absolute -left-[31px] top-1 w-9 h-9 rounded-full bg-[var(--surface-card)] border-2 border-[var(--accent-primary)] flex items-center justify-center shadow-md z-10">
+                      <span className="text-xs font-mono font-black text-[var(--accent-primary)]">
+                        {proc.step}
+                      </span>
+                    </div>
+
+                    <div className="neo-card p-6 border border-[var(--border-light)] rounded-2xl space-y-4 relative overflow-hidden bg-[var(--surface-card)] text-left">
+                      {/* Top bar: Phase & Icon */}
+                      <div className="flex items-center justify-between">
+                        <span className="neo-pill px-3 py-1 text-[10px] font-mono uppercase text-[var(--accent-primary)] font-bold border border-[var(--accent-primary)]/15 bg-[var(--surface-recessed)]">
+                          {proc.timeframe}
+                        </span>
+                        <div className="w-8 h-8 rounded-lg neo-inset flex items-center justify-center text-[var(--accent-primary)]">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                      </div>
+
+                      {/* Title & Description */}
+                      <div className="space-y-1.5">
+                        <h3 className="text-base font-extrabold text-[var(--text-primary)]">
+                          {proc.title}
+                        </h3>
+                        <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-medium">
+                          {proc.desc}
+                        </p>
+                      </div>
+
+                      {/* Highlight Tech/Outcome Badge */}
+                      <div className="pt-2.5 border-t border-[var(--border-subtle)] flex items-center justify-between text-[10px] font-mono text-[var(--text-tertiary)]">
+                        <span className="font-semibold">Key Milestone:</span>
+                        <span className="font-bold text-[var(--text-primary)] bg-[var(--surface-recessed)] px-2 py-0.5 rounded-md border border-[var(--border-light)]">
+                          {proc.highlight}
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
 
         </div>
       </section>
+
+      {/* 4. Tech Stack Marquee */}
+      <TechStackMarquee />
+
+      {/* 5. Final CTA Banner */}
+      <FinalCTASection 
+        badgeText="READY TO BUILD?"
+        title="Let's Build Something Great Together"
+        subtitlePrefix="Get in touch today for a free consultation or quick estimate for your "
+        highlightText="custom web development project."
+        primaryBtnText="Discuss Your Project"
+        secondaryBtnText="Explore Portfolio"
+        secondaryBtnLink={ROUTES.PORTFOLIO}
+      />
     </>
   );
 };

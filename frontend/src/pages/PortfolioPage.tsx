@@ -10,8 +10,6 @@ import { TextReveal } from '../components/effects/TextReveal';
 import { GradientText } from '../components/effects/GradientText';
 import { TextHighlighter } from '../components/effects/TextHighlighter';
 import { FinalCTASection } from '../components/sections/FinalCTASection';
-import { BeforeAfterSlider } from '../components/common/BeforeAfterSlider';
-import { PhoneMockupFrame } from '../components/common/PhoneMockupFrame';
 
 interface ExtendedProjectDetail {
   url: string;
@@ -138,6 +136,18 @@ export const PortfolioPage: React.FC = () => {
   const [filterType, setFilterType] = useState<'web' | 'mobile' | 'portfolio'>('web');
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUploadedImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const filteredProjects = useMemo(() => {
     return portfolioProjects.filter(p => p.projectType === filterType);
@@ -164,11 +174,11 @@ export const PortfolioPage: React.FC = () => {
         description="Explore our portfolio of high-performance web applications, client intake engines, and digital platforms."
       />
 
-      <section className="pt-28 pb-16 min-h-[calc(100vh-80px)] flex flex-col justify-center bg-[var(--bg-primary)] relative overflow-hidden text-left">
+      <section className="min-h-[calc(100vh-60px)] flex flex-col justify-center pt-20 pb-24 md:min-h-[calc(100vh-80px)] md:pt-28 md:pb-16 bg-[var(--bg-primary)] relative overflow-hidden text-left">
         {/* Ambient Radial Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-cyan-500/10 via-blue-600/5 to-indigo-600/10 blur-3xl pointer-events-none rounded-full" />
 
-        <div className="container mx-auto space-y-10 relative z-10">
+        <div className="container mx-auto space-y-6 md:space-y-10 relative z-10 px-4">
           
           <Breadcrumbs />
 
@@ -176,29 +186,28 @@ export const PortfolioPage: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto space-y-6 pt-4 pb-4"
+            className="text-center max-w-3xl mx-auto space-y-4 md:space-y-6 pt-2 pb-2"
           >
-            <div className="inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+            <div className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
               <span>SELECTED PORTFOLIO</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--text-primary)] leading-[1.15]">
+            <h1 className="text-hero text-[var(--text-primary)] leading-[1.1]">
               <TextReveal text="Platforms Engineered to" />{' '}
               <GradientText>Perform.</GradientText>
             </h1>
 
             <p className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto">
-              <TextReveal text="Explore our portfolio of custom websites, booking engines, and digital experiences" />
-              <br className="hidden sm:inline" />
+              <TextReveal text="Explore our portfolio of custom websites, booking engines, and digital experiences delivered with" />{' '}
               <TextHighlighter highlightColor="from-cyan-500/40 to-blue-500/40">
-                <span className="font-bold text-[var(--text-primary)]">delivered with measurable results.</span>
+                <span className="font-bold text-[var(--text-primary)]">measurable results.</span>
               </TextHighlighter>
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <button
                 onClick={() => openBooking()}
-                className="neo-btn neo-btn-accent text-xs md:text-sm py-3.5 px-8 shadow-xl w-full sm:w-auto justify-center"
+                className="neo-btn neo-btn-accent text-xs md:text-sm py-3.5 px-8 shadow-xl w-full sm:w-auto justify-center font-bold"
               >
                 <span>Book Consultation</span>
               </button>
@@ -206,7 +215,7 @@ export const PortfolioPage: React.FC = () => {
           </motion.div>
 
           {/* 2. Metrics Strip */}
-          <div className="neo-card p-8 md:p-10 border border-[var(--border-light)] rounded-3xl grid grid-cols-2 md:grid-cols-4 gap-6 text-center shadow-lg">
+          <div className="neo-card p-5 md:p-10 border border-[var(--border-light)] rounded-3xl grid grid-cols-2 md:grid-cols-4 gap-6 text-center shadow-lg">
             {agencyInfo.stats.map((stat, idx) => (
               <div key={idx} className="space-y-1">
                 <p className="text-2xl md:text-3xl font-extrabold text-[var(--accent-primary)]">{stat.value}</p>
@@ -215,55 +224,144 @@ export const PortfolioPage: React.FC = () => {
             ))}
           </div>
 
+        </div>
+      </section>
+
+      <section className="py-16 bg-[var(--bg-primary)] text-left relative overflow-hidden">
+        <div className="container mx-auto space-y-12 px-4 relative z-10">
+          
+          {/* Mobile-Only Interactive Mockup Uploader / Visualizer Section */}
+          {isMobile && (
+            <div className="neo-card p-6 rounded-3xl border border-[var(--border-light)] shadow-lg space-y-5">
+              <div className="space-y-2 text-center">
+                <span className="text-[10px] font-mono font-bold text-[var(--accent-primary)] uppercase tracking-wider bg-blue-500/10 px-2.5 py-0.5 rounded-md inline-block">
+                  Live Mockup Visualizer
+                </span>
+                <h3 className="text-xl font-extrabold text-[var(--text-primary)]">
+                  Preview Your Website on Mobile
+                </h3>
+                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                  Upload a screenshot or image of your current site to see it previewed in a high-fidelity mobile device.
+                </p>
+              </div>
+
+              {!uploadedImage ? (
+                <div className="border-2 border-dashed border-[var(--border-subtle)] hover:border-[var(--accent-primary)] rounded-2xl p-8 text-center transition-colors cursor-pointer relative bg-[var(--surface-recessed)]/30">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                  />
+                  <div className="space-y-3">
+                    <div className="w-10 h-10 rounded-full bg-[var(--accent-primary)]/10 flex items-center justify-center mx-auto">
+                      <svg className="w-5 h-5 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                      </svg>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs font-bold text-[var(--text-primary)]">Tap to upload a photo</p>
+                      <p className="text-[10px] text-[var(--text-tertiary)]">PNG, JPG up to 5MB</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {/* Phone Frame showing Uploaded Image */}
+                  <div className="flex justify-center">
+                    <div className="relative w-[180px] h-[320px] bg-[#090D1A] rounded-[36px] p-2.5 shadow-2xl border-4 border-slate-800">
+                      {/* Notch */}
+                      <div className="absolute top-4 left-1/2 -translate-x-1/2 w-16 h-4 bg-slate-900 rounded-full z-20 flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 rounded-full bg-slate-800 mr-2" />
+                        <div className="w-1 h-1 rounded-full bg-blue-900/50" />
+                      </div>
+                      
+                      {/* Viewport wrapper */}
+                      <div className="relative w-full h-full rounded-[26px] overflow-hidden bg-slate-950 border border-slate-800/50 flex flex-col justify-between">
+                        <img 
+                          src={uploadedImage} 
+                          alt="Uploaded Preview" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => setUploadedImage(null)}
+                      className="flex-1 py-2 px-4 rounded-xl border border-[var(--border-soft)] text-xs font-bold text-[var(--text-secondary)] bg-[var(--surface-recessed)] hover:text-[var(--accent-primary)] transition-colors"
+                    >
+                      Clear Photo
+                    </button>
+                    <button
+                      onClick={() => openBooking({ projectOverview: "Custom preview audit uploaded" })}
+                      className="flex-1 py-2 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-xs font-bold text-white shadow-md hover:shadow-blue-600/25 transition-all flex items-center justify-center gap-1.5"
+                    >
+                      <span>Redesign This</span>
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+          
           {/* 3. Portfolio Showcase - Staggered Bento Showcase */}
           <div className="space-y-12 text-left pt-16 md:pt-24">
             <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
-              <div className="inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
+              <div className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
                 <span>PROVEN RESULTS</span>
               </div>
               <h2 className="text-section-title text-[var(--text-primary)]">
                 <GradientText>Featured Projects</GradientText>
               </h2>
               <div className="text-body-lg text-[var(--text-secondary)]">
-                <TextReveal text="Every digital flagship is engineered for" />{' '}
+                <TextReveal text="Every digital flagship is engineered for sub-second speed, trust, and" />{' '}
                 <TextHighlighter highlightColor="from-blue-500/40 to-indigo-500/40">
-                  <span className="font-bold text-[var(--text-primary)]">sub-second speed, trust, and audience growth.</span>
+                  <span className="font-bold text-[var(--text-primary)]">audience growth.</span>
                 </TextHighlighter>
               </div>
             </div>
 
             {/* Filter Tabs */}
-            <div className="flex justify-center pb-8 pt-4">
-              <div className="inline-flex rounded-full neo-inset p-1 border border-[var(--border-subtle)] bg-[var(--surface-recessed)]/50 gap-1.5 flex-wrap justify-center max-w-full">
+            <div className="flex justify-center pb-8 pt-4 w-full">
+              <div className="inline-flex rounded-full neo-inset p-1 border border-[var(--border-subtle)] bg-[var(--surface-recessed)]/50 gap-1 w-full max-w-md">
                 <button
                   onClick={() => { setFilterType('web'); setActiveProjectIdx(0); }}
-                  className={`rounded-full px-5 py-2 text-xs font-bold transition-all duration-300 whitespace-nowrap ${
+                  className={`flex-1 rounded-full px-2.5 py-2 text-[10px] sm:text-xs font-bold transition-all duration-300 whitespace-nowrap text-center ${
                     filterType === 'web'
                       ? 'bg-[var(--surface-card)] text-[var(--accent-primary)] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[var(--border-light)]'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
-                  Web Projects (4)
+                  <span className="hidden sm:inline">Web Projects (4)</span>
+                  <span className="inline sm:hidden">Web (4)</span>
                 </button>
                 <button
                   onClick={() => { setFilterType('portfolio'); setActiveProjectIdx(0); }}
-                  className={`rounded-full px-5 py-2 text-xs font-bold transition-all duration-300 whitespace-nowrap ${
+                  className={`flex-1 rounded-full px-2.5 py-2 text-[10px] sm:text-xs font-bold transition-all duration-300 whitespace-nowrap text-center ${
                     filterType === 'portfolio'
                       ? 'bg-[var(--surface-card)] text-[var(--accent-primary)] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[var(--border-light)]'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
-                  Portfolio Websites (3)
+                  <span className="hidden sm:inline">Portfolio Websites (3)</span>
+                  <span className="inline sm:hidden">Portfolio (3)</span>
                 </button>
                 <button
                   onClick={() => { setFilterType('mobile'); setActiveProjectIdx(0); }}
-                  className={`rounded-full px-5 py-2 text-xs font-bold transition-all duration-300 whitespace-nowrap ${
+                  className={`flex-1 rounded-full px-2.5 py-2 text-[10px] sm:text-xs font-bold transition-all duration-300 whitespace-nowrap text-center ${
                     filterType === 'mobile'
                       ? 'bg-[var(--surface-card)] text-[var(--accent-primary)] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[var(--border-light)]'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
-                  Mobile Web Project (1)
+                  <span className="hidden sm:inline">Mobile Web Project (1)</span>
+                  <span className="inline sm:hidden">Mobile (1)</span>
                 </button>
               </div>
             </div>
@@ -296,16 +394,6 @@ export const PortfolioPage: React.FC = () => {
                         className="snap-start shrink-0 w-[88vw] max-w-[340px] neo-card p-6 rounded-[32px] border border-[var(--border-light)] shadow-[0_15px_35px_-12px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_45px_-15px_rgba(0,0,0,0.4)] flex flex-col justify-between space-y-6 text-left"
                       >
                         <div className="space-y-5">
-                          {/* iPhone Mockup Frame housing Before/After slider */}
-                          <div className="pt-2">
-                            <PhoneMockupFrame>
-                              <BeforeAfterSlider 
-                                afterImage={project.heroImage}
-                                alt={project.title}
-                              />
-                            </PhoneMockupFrame>
-                          </div>
-
                           {/* Details Metadata */}
                           <div className="space-y-2">
                             <span className="text-[10px] font-mono font-bold text-[var(--accent-primary)] uppercase tracking-wider bg-blue-500/10 px-2.5 py-0.5 rounded-md inline-block">
@@ -523,20 +611,19 @@ export const PortfolioPage: React.FC = () => {
               </motion.div>
             )}
           </div>
-
-          {/* 4. Final CTA Section */}
-          <FinalCTASection 
-            badgeText="PORTFOLIO INQUIRY"
-            title="Want Similar Growth For Your Business?"
-            subtitlePrefix="Book a 15-minute consultation to discuss your custom website requirements and "
-            highlightText="receive a direct project proposal."
-            primaryBtnText="Book Call"
-            secondaryBtnText="Explore Services"
-            secondaryBtnLink="/services"
-          />
-
         </div>
       </section>
+
+      {/* 4. Final CTA Section */}
+      <FinalCTASection 
+        badgeText="PORTFOLIO INQUIRY"
+        title="Want Similar Growth For Your Business?"
+        subtitlePrefix="Book a 15-minute consultation to discuss your custom website requirements and "
+        highlightText="receive a direct project proposal."
+        primaryBtnText="Book Call"
+        secondaryBtnText="Explore Services"
+        secondaryBtnLink="/services"
+      />
     </>
   );
 };
