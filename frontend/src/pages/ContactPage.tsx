@@ -288,7 +288,7 @@ export const ContactPage: React.FC = () => {
                           value={formData.phone}
                           onChange={e => handleChange('phone', e.target.value)}
                           onBlur={() => handleBlur('phone')}
-                          placeholder="+1 (555) 000-0000"
+                          placeholder="+91 98765 43210"
                           className={getInputClass('phone')}
                         />
                         {touched.phone && !errors.phone && formData.phone.trim() !== '' && (

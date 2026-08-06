@@ -66,7 +66,6 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
 
       case 'message':
         if (!value.trim()) return 'Project Notes are required.';
-        if (value.trim().length < 10) return `Notes must be at least 10 characters (${value.trim().length}/10).`;
         if (value.trim().length > 1000) return 'Notes cannot exceed 1000 characters.';
         return '';
 
@@ -264,7 +263,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                       value={formData.phone}
                       onChange={(e) => handleChange('phone', e.target.value)}
                       onBlur={() => handleBlur('phone')}
-                      placeholder="+1 (555) 019-2834"
+                      placeholder="+91 98765 43210"
                       className={getInputClass('phone')}
                     />
                   </div>
@@ -308,21 +307,15 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
 
               {/* Message */}
               <div className="space-y-1.5">
-                <div className="flex justify-between items-center">
-                  <label className="text-xs font-bold text-[var(--text-primary)] block">
-                    Project Notes / Requirements <span className="text-rose-500">*</span>
-                  </label>
-                  <span className={`text-[10px] font-mono ${formData.message.trim().length < 10 ? 'text-rose-500' : 'text-[var(--text-tertiary)]'}`}>
-                    {formData.message.trim().length} / 1000 (Min 10 chars)
-                  </span>
-                </div>
+                <label className="text-xs font-bold text-[var(--text-primary)] block">
+                  Project Notes / Requirements <span className="text-rose-500">*</span>
+                </label>
                 <div className="relative">
                   <div className="absolute top-3.5 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--accent-primary)]">
                     <MessageSquare className="w-4 h-4" />
                   </div>
                   <textarea
                     required
-                    minLength={10}
                     maxLength={1000}
                     rows={4}
                     autoCapitalize="sentences"
@@ -330,7 +323,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                     value={formData.message}
                     onChange={(e) => handleChange('message', e.target.value)}
                     onBlur={() => handleBlur('message')}
-                    placeholder="How can we help? Share your target timeline, features needed (Min 10 characters)..."
+                    placeholder="How can we help? Share your target timeline, features needed..."
                     className={`w-full pl-10 pr-4 py-3 text-xs md:text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-primary)] border-2 rounded-xl shadow-sm focus:outline-none transition-all leading-relaxed placeholder-[var(--text-tertiary)] ${
                       isMobile ? 'min-h-[100px] rounded-2xl text-base' : ''
                     } ${

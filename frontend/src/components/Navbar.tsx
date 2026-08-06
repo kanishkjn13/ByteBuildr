@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 
 // 2. Animations & Visual Physics
@@ -8,6 +8,7 @@ import { Sun, Moon, Mail, Home, Info, Compass, Briefcase } from 'lucide-react';
 // 3. Constants, Hooks & Types
 import { ROUTES } from '../constants/routes';
 import { useBooking } from '../hooks/useBooking';
+import { useIsMobile } from '../hooks/useIsMobile';
 import type { BookingData } from '../types';
 import { agencyInfo } from '../data/agencyData';
 
@@ -26,6 +27,27 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const { openBooking: hookOpenBooking } = useBooking();
   const location = useLocation();
+  const isMobile = useIsMobile();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const theme = propsTheme || 'light';
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > 80) {
+        setIsScrolled(true);
+      } else if (currentScrollY < 20) {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleBooking = (data?: Partial<BookingData>) => {
     if (propsOpenBooking) {
@@ -55,9 +77,69 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       {/* Sticky Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[var(--border-light)] bg-[var(--surface-card)]/80 backdrop-blur-xl shadow-sm transition-all duration-300">
+      <motion.header
+        initial={false}
+        animate={
+          isScrolled && !isMobile
+            ? {
+                y: 16,
+                width: "95%",
+                maxWidth: "1280px", // aligns with max-w-7xl
+                borderRadius: "9999px",
+                boxShadow: theme === 'dark' 
+                  ? "0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.2)"
+                  : "0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.03)",
+                borderTopColor: theme === 'dark' ? "rgba(255, 255, 255, 0.08)" : "#e5e7eb",
+                borderLeftColor: theme === 'dark' ? "rgba(255, 255, 255, 0.08)" : "#e5e7eb",
+                borderRightColor: theme === 'dark' ? "rgba(255, 255, 255, 0.08)" : "#e5e7eb",
+                borderBottomColor: theme === 'dark' ? "rgba(255, 255, 255, 0.08)" : "#e5e7eb",
+              }
+            : {
+                y: 0,
+                width: "100%",
+                maxWidth: "100%",
+                borderRadius: "0px",
+                boxShadow: "0 1px 3px rgba(15, 23, 42, 0.04)",
+                borderTopColor: "rgba(0, 0, 0, 0)",
+                borderLeftColor: "rgba(0, 0, 0, 0)",
+                borderRightColor: "rgba(0, 0, 0, 0)",
+                borderBottomColor: isMobile 
+                  ? (theme === 'dark' ? "rgba(255, 255, 255, 0.08)" : "#e5e7eb") 
+                  : "rgba(0, 0, 0, 0)",
+              }
+        }
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 32,
+          mass: 0.8
+        }}
+        className="fixed top-0 left-0 right-0 z-50 mx-auto bg-[var(--surface-card)]/80 backdrop-blur-xl border"
+      >
         <div className="mx-auto w-full">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between gap-2 md:gap-4">
+          <motion.div
+            animate={{
+              paddingTop: isScrolled && !isMobile ? "10px" : "14px",
+              paddingBottom: isScrolled && !isMobile ? "10px" : "14px",
+              paddingLeft: isMobile 
+                ? "16px" 
+                : isScrolled 
+                ? "40px" // Add more padding to offset rounded capsule corners
+                : "32px", // md:px-8 = 32px
+              paddingRight: isMobile 
+                ? "16px" 
+                : isScrolled 
+                ? "40px" 
+                : "32px",
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 32,
+              mass: 0.8
+            }}
+            className="max-w-7xl mx-auto flex items-center justify-between gap-2 md:gap-4"
+          >
             
             {/* Left: Brand Logo Emblem */}
             <Link to={ROUTES.HOME} onClick={handleNavClick} className="flex items-center gap-2.5 group shrink-0">
@@ -164,9 +246,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             </div>
 
-          </div>
+          </motion.div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Sticked Bottom Nav Bar for Mobile (<768px) */}
       <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex justify-center pointer-events-none">

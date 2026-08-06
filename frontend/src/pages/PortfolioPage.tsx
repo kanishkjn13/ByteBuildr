@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, Check, ArrowRight, ChevronDown } from 'lucide-react';
+import { Lock, Check, ArrowRight, ChevronDown, RotateCw } from 'lucide-react';
 import { SEOHead } from '../seo/SEOHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { useBooking } from '../hooks/useBooking';
@@ -10,6 +10,8 @@ import { TextReveal } from '../components/effects/TextReveal';
 import { GradientText } from '../components/effects/GradientText';
 import { TextHighlighter } from '../components/effects/TextHighlighter';
 import { FinalCTASection } from '../components/sections/FinalCTASection';
+import { PhoneMockupFrame } from '../components/common/PhoneMockupFrame';
+import { MonitorMockup } from '../components/common/MonitorMockup';
 
 interface ExtendedProjectDetail {
   url: string;
@@ -136,18 +138,6 @@ export const PortfolioPage: React.FC = () => {
   const [filterType, setFilterType] = useState<'web' | 'mobile' | 'portfolio'>('web');
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUploadedImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const filteredProjects = useMemo(() => {
     return portfolioProjects.filter(p => p.projectType === filterType);
@@ -230,85 +220,7 @@ export const PortfolioPage: React.FC = () => {
       <section className="py-16 bg-[var(--bg-primary)] text-left relative overflow-hidden">
         <div className="container mx-auto space-y-12 px-4 relative z-10">
           
-          {/* Mobile-Only Interactive Mockup Uploader / Visualizer Section */}
-          {isMobile && (
-            <div className="neo-card p-6 rounded-3xl border border-[var(--border-light)] shadow-lg space-y-5">
-              <div className="space-y-2 text-center">
-                <span className="text-[10px] font-mono font-bold text-[var(--accent-primary)] uppercase tracking-wider bg-blue-500/10 px-2.5 py-0.5 rounded-md inline-block">
-                  Live Mockup Visualizer
-                </span>
-                <h3 className="text-xl font-extrabold text-[var(--text-primary)]">
-                  Preview Your Website on Mobile
-                </h3>
-                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  Upload a screenshot or image of your current site to see it previewed in a high-fidelity mobile device.
-                </p>
-              </div>
 
-              {!uploadedImage ? (
-                <div className="border-2 border-dashed border-[var(--border-subtle)] hover:border-[var(--accent-primary)] rounded-2xl p-8 text-center transition-colors cursor-pointer relative bg-[var(--surface-recessed)]/30">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                  />
-                  <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-full bg-[var(--accent-primary)]/10 flex items-center justify-center mx-auto">
-                      <svg className="w-5 h-5 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                      </svg>
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-xs font-bold text-[var(--text-primary)]">Tap to upload a photo</p>
-                      <p className="text-[10px] text-[var(--text-tertiary)]">PNG, JPG up to 5MB</p>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {/* Phone Frame showing Uploaded Image */}
-                  <div className="flex justify-center">
-                    <div className="relative w-[180px] h-[320px] bg-[#090D1A] rounded-[36px] p-2.5 shadow-2xl border-4 border-slate-800">
-                      {/* Notch */}
-                      <div className="absolute top-4 left-1/2 -translate-x-1/2 w-16 h-4 bg-slate-900 rounded-full z-20 flex items-center justify-center">
-                        <div className="w-1.5 h-1.5 rounded-full bg-slate-800 mr-2" />
-                        <div className="w-1 h-1 rounded-full bg-blue-900/50" />
-                      </div>
-                      
-                      {/* Viewport wrapper */}
-                      <div className="relative w-full h-full rounded-[26px] overflow-hidden bg-slate-950 border border-slate-800/50 flex flex-col justify-between">
-                        <img 
-                          src={uploadedImage} 
-                          alt="Uploaded Preview" 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => setUploadedImage(null)}
-                      className="flex-1 py-2 px-4 rounded-xl border border-[var(--border-soft)] text-xs font-bold text-[var(--text-secondary)] bg-[var(--surface-recessed)] hover:text-[var(--accent-primary)] transition-colors"
-                    >
-                      Clear Photo
-                    </button>
-                    <button
-                      onClick={() => openBooking({ projectOverview: "Custom preview audit uploaded" })}
-                      className="flex-1 py-2 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-xs font-bold text-white shadow-md hover:shadow-blue-600/25 transition-all flex items-center justify-center gap-1.5"
-                    >
-                      <span>Redesign This</span>
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
           
           {/* 3. Portfolio Showcase - Staggered Bento Showcase */}
           <div className="space-y-12 text-left pt-16 md:pt-24">
@@ -394,6 +306,72 @@ export const PortfolioPage: React.FC = () => {
                         className="snap-start shrink-0 w-[88vw] max-w-[340px] neo-card p-6 rounded-[32px] border border-[var(--border-light)] shadow-[0_15px_35px_-12px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_45px_-15px_rgba(0,0,0,0.4)] flex flex-col justify-between space-y-6 text-left"
                       >
                         <div className="space-y-5">
+                          {/* Mobile-like Phone Mockup or Monitor Mockup based on projectType */}
+                          <div className="flex justify-center pb-2 w-full">
+                            {project.projectType === 'mobile' ? (
+                              <PhoneMockupFrame
+                                widthClass="w-[180px]"
+                                heightClass="h-[300px]"
+                                borderClass="border-[6px]"
+                                roundedClass="rounded-[28px]"
+                                innerRoundedClass="rounded-[22px]"
+                                showButtons={false}
+                              >
+                                <div className="w-full h-full relative overflow-hidden bg-[#090D1A]">
+                                  {/* Simulated Mobile Status Bar (Solid Dark background to hide screenshot tabs) */}
+                                  <div className="absolute top-0 inset-x-0 h-5 bg-slate-950 z-20 flex items-center justify-between px-4 text-[7px] font-bold text-white font-sans tracking-tight border-b border-slate-900/30">
+                                    <span>9:41</span>
+                                    <div className="flex items-center gap-1">
+                                      <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                        <rect x="3" y="16" width="2" height="4" rx="0.5" />
+                                        <rect x="7.5" y="12" width="2" height="8" rx="0.5" />
+                                        <rect x="12" y="8" width="2" height="12" rx="0.5" />
+                                        <rect x="16.5" y="4" width="2" height="16" rx="0.5" />
+                                      </svg>
+                                      <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.444 12.444 0 0 0 8 3 12.44 12.44 0 0 0 .663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049z"/>
+                                      </svg>
+                                      <div className="w-4 h-2 border border-white/80 rounded-[3px] p-[0.25px] flex items-center relative gap-[0.5px]">
+                                        <div className="bg-white h-full w-[80%] rounded-[1px]" />
+                                        <div className="w-[1px] h-[35%] bg-white/80 rounded-r-[0.5px] absolute -right-[1.5px] top-[32.5%]" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                  {/* Simulated Address Bar for mobile browser style */}
+                                  <div className="absolute bottom-4 inset-x-2.5 bg-slate-900/80 backdrop-blur-md border border-slate-800/80 rounded-xl py-1 px-1.5 flex items-center justify-between z-20 text-[7px] text-slate-300 font-sans shadow-md">
+                                    <span className="text-[6px] font-medium text-slate-500 uppercase tracking-wider shrink-0 select-none">aA</span>
+                                    <div className="flex items-center justify-center gap-1.5 flex-1 min-w-0 px-1">
+                                      <Lock className="w-1.5 h-1.5 text-emerald-400 shrink-0" />
+                                      <span className="truncate text-slate-300 text-[6.5px] font-medium leading-none">{details.url.replace('https://', '')}</span>
+                                    </div>
+                                    <RotateCw className="w-1.5 h-1.5 text-slate-400 shrink-0" />
+                                  </div>
+
+                                  <img 
+                                    src={project.heroImage} 
+                                    alt={project.title}
+                                    loading="lazy"
+                                    className="w-full h-[112%] object-cover absolute -top-[10%] object-top" 
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
+                                </div>
+                              </PhoneMockupFrame>
+                            ) : (
+                              <MonitorMockup url={details.url} className="w-full max-w-[260px]">
+                                <div className="w-full h-full relative overflow-hidden bg-slate-900 aspect-[16/10]">
+                                  <img 
+                                    src={project.heroImage} 
+                                    alt={project.title}
+                                    loading="lazy"
+                                    className="w-full h-[112%] object-cover absolute -top-[10%] object-top" 
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
+                                </div>
+                              </MonitorMockup>
+                            )}
+                          </div>
+
                           {/* Details Metadata */}
                           <div className="space-y-2">
                             <span className="text-[10px] font-mono font-bold text-[var(--accent-primary)] uppercase tracking-wider bg-blue-500/10 px-2.5 py-0.5 rounded-md inline-block">
@@ -513,42 +491,77 @@ export const PortfolioPage: React.FC = () => {
                       <div className={`absolute top-1/2 ${isEven ? 'right-0' : 'left-0'} -translate-y-1/2 w-96 h-96 bg-blue-500/10 blur-3xl pointer-events-none rounded-full`} />
 
                       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-                        {/* Browser Mockup Column */}
-                        <div className={`lg:col-span-7 ${isEven ? 'order-1' : 'order-1 lg:order-2'}`}>
-                          <motion.div 
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ duration: 0.3 }}
-                            className="rounded-2xl overflow-hidden neo-card border border-[var(--border-light)] shadow-2xl bg-slate-950 group/browser"
-                          >
-                            {/* macOS Window Titlebar */}
-                            <div className="bg-slate-900/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-4">
-                              <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-rose-500/90 hover:opacity-80 transition-opacity" />
-                                <div className="w-3 h-3 rounded-full bg-amber-500/90 hover:opacity-80 transition-opacity" />
-                                <div className="w-3 h-3 rounded-full bg-emerald-500/90 hover:opacity-80 transition-opacity" />
-                              </div>
+                        {/* Browser/Phone Mockup Column */}
+                        <div className={`lg:col-span-7 ${isEven ? 'order-1' : 'order-1 lg:order-2'} flex justify-center`}>
+                          {project.projectType === 'mobile' ? (
+                            <motion.div
+                              whileHover={{ scale: 1.02 }}
+                              transition={{ duration: 0.3 }}
+                              className="group/phone"
+                            >
+                              <PhoneMockupFrame>
+                                <div className="w-full h-full relative overflow-hidden bg-[#090D1A]">
+                                  {/* Simulated Mobile Status Bar (Solid Dark background to hide screenshot tabs) */}
+                                  <div className="absolute top-0 inset-x-0 h-6 bg-slate-950 z-20 flex items-center justify-between px-6 text-[10px] font-bold text-white font-sans tracking-tight border-b border-slate-900/30">
+                                    <span>9:41</span>
+                                    <div className="flex items-center gap-1.5">
+                                      <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                        <rect x="3" y="16" width="2.5" height="4" rx="0.5" />
+                                        <rect x="7.5" y="12" width="2.5" height="8" rx="0.5" />
+                                        <rect x="12" y="8" width="2.5" height="12" rx="0.5" />
+                                        <rect x="16.5" y="4" width="2.5" height="16" rx="0.5" />
+                                      </svg>
+                                      <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.444 12.444 0 0 0 8 3 12.44 12.44 0 0 0 .663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049z"/>
+                                      </svg>
+                                      <div className="w-5.5 h-3 border border-white/80 rounded-md p-0.5 flex items-center relative gap-[1px]">
+                                        <div className="bg-white h-full w-[80%] rounded-[1.5px]" />
+                                        <div className="w-[1.5px] h-[35%] bg-white/80 rounded-r-[1px] absolute -right-[2.5px] top-[32.5%]" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                  {/* Mobile Web Address Bar */}
+                                  <div className="absolute bottom-5 inset-x-4 bg-slate-900/80 backdrop-blur-md border border-slate-800/80 rounded-2xl py-2 px-3 flex items-center justify-between z-20 text-[10px] text-slate-300 font-sans shadow-lg select-none">
+                                    <span className="text-[10px] font-medium text-slate-500 uppercase tracking-wider shrink-0 select-none">aA</span>
+                                    <div className="flex items-center justify-center gap-1.5 flex-1 min-w-0 px-2">
+                                      <Lock className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
+                                      <span className="truncate text-slate-300 text-[10px] font-medium leading-none">{details.url.replace('https://', '')}</span>
+                                    </div>
+                                    <RotateCw className="w-2.5 h-2.5 text-slate-400 hover:text-slate-200 cursor-pointer shrink-0 transition-colors" />
+                                  </div>
 
-                              {/* Fake URL Bar */}
-                              <div className="neo-inset bg-slate-950/80 px-3 py-1 rounded-lg border border-slate-800/80 flex items-center gap-2 text-[11px] font-mono text-slate-400 max-w-xs w-full justify-center">
-                                <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
-                                <span className="truncate">{details.url}</span>
-                              </div>
-
-                              <div className="w-12" />
-                            </div>
-
-                            {/* Showcase Image */}
-                            <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden bg-slate-900">
-                              <img 
-                                src={project.heroImage} 
-                                alt={project.title}
-                                loading="lazy"
-                                decoding="async"
-                                className="w-full h-full object-cover group-hover/browser:scale-105 transition-transform duration-700" 
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent opacity-0 group-hover/browser:opacity-100 transition-opacity duration-300" />
-                            </div>
-                          </motion.div>
+                                  <img 
+                                    src={project.heroImage} 
+                                    alt={project.title}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="w-full h-[112%] object-cover absolute -top-[10%] object-top group-hover/phone:scale-105 transition-transform duration-700" 
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent opacity-0 group-hover/phone:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                </div>
+                              </PhoneMockupFrame>
+                            </motion.div>
+                          ) : (
+                            <motion.div 
+                              whileHover={{ scale: 1.01 }}
+                              transition={{ duration: 0.3 }}
+                              className="w-full group/monitor flex justify-center"
+                            >
+                              <MonitorMockup url={details.url}>
+                                <div className="w-full h-full relative overflow-hidden bg-slate-900 aspect-[16/10]">
+                                  <img 
+                                    src={project.heroImage} 
+                                    alt={project.title}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="w-full h-[112%] object-cover absolute -top-[10%] object-top group-hover/monitor:scale-[1.03] transition-transform duration-700" 
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent opacity-0 group-hover/monitor:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                </div>
+                              </MonitorMockup>
+                            </motion.div>
+                          )}
                         </div>
 
                         {/* Project Information Column */}
