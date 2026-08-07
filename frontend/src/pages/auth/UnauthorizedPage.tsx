@@ -59,7 +59,7 @@ export const UnauthorizedPage: React.FC = () => {
         </div>
 
         <div className="text-[10px] font-mono text-[var(--text-tertiary)]">
-          Byte Build Enterprise Role-Based Access Control System
+          ByteBuilders Enterprise Role-Based Access Control System
         </div>
 
       </div>

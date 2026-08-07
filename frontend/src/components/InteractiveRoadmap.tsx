@@ -354,7 +354,17 @@ export const InteractiveRoadmap: React.FC = () => {
                   onTouchEnd={handleTouchEnd}
                   onTouchCancel={handleTouchEnd}
                   onClick={() => setExpandedMilestoneId(isExpanded ? null : m.id)}
-                  className={`neo-card p-5 rounded-2xl border shadow-lg bg-[var(--surface-card)] space-y-2 transition-all cursor-pointer ${
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setExpandedMilestoneId(isExpanded ? null : m.id);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isExpanded}
+                  aria-label={`Phase ${m.step}: ${m.title}`}
+                  className={`neo-card p-5 rounded-2xl border shadow-lg bg-[var(--surface-card)] space-y-2 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] ${
                     isExpanded ? 'border-[var(--accent-primary)] ring-2 ring-blue-500/10' : 'border-[var(--border-light)]'
                   }`}
                 >
@@ -451,6 +461,7 @@ export const InteractiveRoadmap: React.FC = () => {
                     <button 
                       onClick={() => setLongPressedMilestoneId(null)}
                       className="w-8 h-8 rounded-full bg-[var(--surface-recessed)] flex items-center justify-center text-[var(--text-secondary)]"
+                      aria-label="Close phase preview"
                     >
                       <X className="w-4 h-4" />
                     </button>

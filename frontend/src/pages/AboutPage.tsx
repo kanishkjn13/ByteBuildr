@@ -192,7 +192,7 @@ export const AboutPage: React.FC = () => {
                     <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold shrink-0">
                       <Zap className="w-4.5 h-4.5" />
                     </div>
-                    <h3 className="text-sm sm:text-base font-extrabold text-[var(--text-primary)]">The Byte Build Solution</h3>
+                    <h3 className="text-sm sm:text-base font-extrabold text-[var(--text-primary)]">The ByteBuilders Solution</h3>
                   </div>
                   <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                     We operate at the intersection of <strong className="text-[var(--text-primary)]">refined minimalist aesthetics</strong> and <strong className="text-[var(--text-primary)]">high-conversion UX engineering</strong>. By combining modern web standards, sub-second code, and clean CSS, we deliver web platforms that project immediate authority.
@@ -252,7 +252,7 @@ export const AboutPage: React.FC = () => {
               </div>
 
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                Establish Byte Build as the premier long-term technology partner for forward-thinking enterprises seeking sustained digital market leadership, technical excellence, and zero-compromise quality.
+                Establish ByteBuilders as the premier long-term technology partner for forward-thinking enterprises seeking sustained digital market leadership, technical excellence, and zero-compromise quality.
               </p>
             </motion.div>
 
@@ -332,11 +332,11 @@ export const AboutPage: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* 5. Legacy vs Byte Build Comparison Cards (Carousel on Mobile, Grid on Desktop) */}
+          {/* 5. Legacy vs ByteBuilders Comparison Cards (Carousel on Mobile, Grid on Desktop) */}
           <div className="space-y-6 md:space-y-8">
             <div className="text-center max-w-2xl mx-auto space-y-2">
               <div className="hidden md:inline-flex items-center gap-2 neo-pill px-4 py-2 text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold">
-                <span>WHY BYTE BUILD</span>
+                <span>WHY BYTEBUILDERS</span>
               </div>
               <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[var(--text-primary)]">
                 <GradientText>Solving Real Business Frustrations</GradientText>
@@ -377,7 +377,7 @@ export const AboutPage: React.FC = () => {
                     <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">{item.oldDesc}</p>
                   </div>
                   <div className="pt-2 border-t border-[var(--border-subtle)] mt-2">
-                    <span className="text-[10px] font-bold text-emerald-600 block">✓ Byte Build: {item.newText}</span>
+                    <span className="text-[10px] font-bold text-emerald-600 block">✓ ByteBuilders: {item.newText}</span>
                   </div>
                 </div>
               ))}
@@ -390,7 +390,7 @@ export const AboutPage: React.FC = () => {
                 <h4 className="text-xs font-bold text-rose-500">Outdated Website Templates</h4>
                 <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">Generic layout that looks like every competitor and damages brand authority.</p>
                 <div className="pt-2 border-t border-rose-500/20">
-                  <span className="text-[10px] font-bold text-emerald-600 block">✓ Byte Build Upgrade: Custom Minimalist UI Flagship</span>
+                  <span className="text-[10px] font-bold text-emerald-600 block">✓ ByteBuilders Upgrade: Custom Minimalist UI Flagship</span>
                 </div>
               </div>
 
@@ -399,7 +399,7 @@ export const AboutPage: React.FC = () => {
                 <h4 className="text-xs font-bold text-rose-500">12%+ Booking Marketplace Fees</h4>
                 <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">Paying heavy monthly fees to third-party appointment platforms.</p>
                 <div className="pt-2 border-t border-rose-500/20">
-                  <span className="text-[10px] font-bold text-emerald-600 block">✓ Byte Build Upgrade: 0% Fee Automated Intake Engine</span>
+                  <span className="text-[10px] font-bold text-emerald-600 block">✓ ByteBuilders Upgrade: 0% Fee Automated Intake Engine</span>
                 </div>
               </div>
 
@@ -408,7 +408,7 @@ export const AboutPage: React.FC = () => {
                 <h4 className="text-xs font-bold text-rose-500">3.5s+ Slow Page Loading Lag</h4>
                 <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">Bloated code causing 50%+ of mobile visitors to bounce before loading.</p>
                 <div className="pt-2 border-t border-rose-500/20">
-                  <span className="text-[10px] font-bold text-emerald-600 block">✓ Byte Build Upgrade: Sub-500ms Edge CDN Speed</span>
+                  <span className="text-[10px] font-bold text-emerald-600 block">✓ ByteBuilders Upgrade: Sub-500ms Edge CDN Speed</span>
                 </div>
               </div>
 
@@ -417,7 +417,7 @@ export const AboutPage: React.FC = () => {
                 <h4 className="text-xs font-bold text-rose-500">Zero Post-Launch SLA Support</h4>
                 <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">Left stranded with security vulnerabilities and broken plugins.</p>
                 <div className="pt-2 border-t border-rose-500/20">
-                  <span className="text-[10px] font-bold text-emerald-600 block">✓ Byte Build Upgrade: 24/7 Dedicated Partner SLA</span>
+                  <span className="text-[10px] font-bold text-emerald-600 block">✓ ByteBuilders Upgrade: 24/7 Dedicated Partner SLA</span>
                 </div>
               </div>
             </div>
@@ -430,7 +430,7 @@ export const AboutPage: React.FC = () => {
                 <span>WHY CHOOSE US</span>
               </div>
               <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[var(--text-primary)]">
-                <GradientText>Why Choose Byte Build</GradientText>
+                <GradientText>Why Choose ByteBuilders</GradientText>
               </h3>
             </div>
 

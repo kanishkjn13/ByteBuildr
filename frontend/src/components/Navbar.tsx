@@ -193,6 +193,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={propsToggleTheme}
                   className="w-9 h-9 rounded-xl neo-card border border-[var(--border-light)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-all hover:scale-105 active:shadow-inner shadow-sm overflow-hidden"
                   title="Toggle Theme"
+                  aria-label="Toggle color theme"
                 >
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.div
@@ -223,6 +224,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={propsToggleTheme}
                   className="w-9 h-9 rounded-xl neo-card border border-[var(--border-light)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-all active:scale-95 shadow-sm overflow-hidden"
                   title="Toggle Theme"
+                  aria-label="Toggle color theme"
                 >
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.div

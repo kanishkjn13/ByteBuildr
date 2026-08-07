@@ -94,7 +94,7 @@ export const ClientFAQ: React.FC<ClientFAQProps> = ({ onOpenBooking }) => {
 
         {/* Still Have Questions Box */}
         <div className="neo-card p-8 max-w-xl mx-auto border border-[var(--border-light)] rounded-2xl text-center space-y-4">
-          <h4 className="text-base font-bold text-[var(--text-primary)]">Still Have Specific Objections or Questions?</h4>
+          <h3 className="text-base font-bold text-[var(--text-primary)]">Still Have Specific Objections or Questions?</h3>
           <p className="text-xs text-[var(--text-secondary)]">Discuss your project directly with our Senior Product Architect.</p>
           <button
             onClick={onOpenBooking}

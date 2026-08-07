@@ -20,6 +20,7 @@ const PortfolioPage = lazy(() => import('../pages/PortfolioPage').then(m => ({ d
 const ContactPage = lazy(() => import('../pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const ClientPortalPage = lazy(() => import('../portal/ClientPortalPage').then(m => ({ default: m.ClientPortalPage })));
 const AdminDashboardPage = lazy(() => import('../admin/AdminDashboardPage').then(m => ({ default: m.AdminDashboardPage })));
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
 // Enterprise Authentication Pages
 const LoginPage = lazy(() => import('../pages/auth/LoginPage').then(m => ({ default: m.LoginPage })));
@@ -76,7 +77,7 @@ export const AppRoutes: React.FC = () => {
           <Route path={ROUTES.SERVICES} element={<ServicesPage />} />
           <Route path={ROUTES.PORTFOLIO} element={<PortfolioPage />} />
           <Route path={ROUTES.CONTACT} element={<ContactPage />} />
-          <Route path="*" element={<HomePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Suspense>

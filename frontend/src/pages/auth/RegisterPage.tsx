@@ -24,7 +24,7 @@ export const RegisterPage: React.FC = () => {
               Admin-Only Client Creation
             </h1>
             <p className="text-xs text-[var(--text-secondary)] font-mono">
-              Byte Build Enterprise Client Access Protocol
+              ByteBuilders Enterprise Client Access Protocol
             </p>
           </div>
         </div>
@@ -41,7 +41,7 @@ export const RegisterPage: React.FC = () => {
               Client Accounts Provisioned by Admin Only
             </h2>
             <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-sans">
-              Self-service registration for client accounts is disabled. Organization IDs and initial passwords for clients are created exclusively through the <strong>Byte Build Admin Portal</strong>.
+              Self-service registration for client accounts is disabled. Organization IDs and initial passwords for clients are created exclusively through the <strong>ByteBuilders Admin Portal</strong>.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export const RegisterPage: React.FC = () => {
               <span>How to access your client portal:</span>
             </div>
             <ul className="space-y-1.5 text-[11px] text-[var(--text-secondary)] list-disc pl-4">
-              <li>Request your Byte Build Project Architect or Admin to provision your organization.</li>
+              <li>Request your ByteBuilders Project Architect or Admin to provision your organization.</li>
               <li>Your Admin will issue your Organization ID & temporary Password.</li>
               <li>Use your assigned credentials to log into the Client Portal.</li>
             </ul>
@@ -70,7 +70,7 @@ export const RegisterPage: React.FC = () => {
               className="neo-btn w-full py-3 text-xs font-bold justify-center gap-2 text-[var(--text-secondary)]"
             >
               <Mail className="w-4 h-4" />
-              <span>Contact Byte Build Admin Team</span>
+              <span>Contact ByteBuilders Admin Team</span>
             </Link>
           </div>
 

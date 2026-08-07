@@ -150,6 +150,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
         <button
           onClick={resetAndClose}
           className="absolute top-5 right-5 w-8 h-8 rounded-full neo-pill flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+          aria-label="Close modal"
         >
           <X className="w-4 h-4" />
         </button>

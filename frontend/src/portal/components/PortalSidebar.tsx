@@ -92,6 +92,7 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
               onClick={onToggleCollapse}
               className="w-8 h-8 rounded-xl neo-inset hidden lg:flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors"
               title={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+              aria-label={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
             >
               {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
             </button>
@@ -179,6 +180,7 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
                   <button
                     onClick={onMobileClose}
                     className="w-8 h-8 rounded-xl neo-inset flex items-center justify-center text-[var(--text-secondary)]"
+                    aria-label="Close menu"
                   >
                     <X className="w-4 h-4" />
                   </button>

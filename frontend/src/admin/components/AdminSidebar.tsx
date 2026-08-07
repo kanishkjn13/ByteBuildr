@@ -96,6 +96,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="w-7 h-7 rounded-lg neo-inset flex items-center justify-center text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors hidden md:flex shrink-0"
             title={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+            aria-label={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
           >
             {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
           </button>
@@ -192,12 +193,12 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                   <div className="flex items-center gap-2.5">
                     <img 
                       src="/logo.png" 
-                      alt="Byte Build Logo" 
+                      alt="ByteBuilders Logo" 
                       className="w-8 h-8 object-contain"
                     />
                     <div>
                       <span className="text-sm font-black text-[var(--text-primary)] tracking-tight block leading-none">
-                        BYTE BUILD
+                        BYTEBUILDERS
                       </span>
                       <span className="text-[9px] font-mono text-[var(--accent-primary)] uppercase tracking-wider font-extrabold block mt-0.5">
                         Admin Control Center
@@ -208,6 +209,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                   <button
                     onClick={onMobileClose}
                     className="w-8 h-8 rounded-xl neo-inset flex items-center justify-center text-[var(--text-secondary)]"
+                    aria-label="Close menu"
                   >
                     <X className="w-4 h-4" />
                   </button>

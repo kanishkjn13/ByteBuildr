@@ -8,4 +8,24 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('scheduler')) {
+              return 'vendor-core';
+            }
+            if (id.includes('framer-motion') || id.includes('lenis')) {
+              return 'vendor-motion';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-icons';
+            }
+            return 'vendor-lib';
+          }
+        }
+      }
+    }
+  }
 })
