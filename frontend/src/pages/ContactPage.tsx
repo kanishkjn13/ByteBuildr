@@ -134,7 +134,7 @@ export const ContactPage: React.FC = () => {
         />
       </Helmet>
 
-      <section className="min-h-0 md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-20 pb-6 md:pb-16 bg-[var(--bg-primary)] relative overflow-hidden text-left">
+      <section className="min-h-0 md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-28 pb-6 md:pt-36 md:pb-16 bg-[var(--bg-primary)] relative overflow-hidden text-left">
         {/* Ambient Radial Background Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-blue-600/10 via-indigo-500/5 to-cyan-500/10 blur-3xl pointer-events-none rounded-full" />
 

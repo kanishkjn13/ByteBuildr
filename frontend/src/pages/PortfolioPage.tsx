@@ -167,7 +167,7 @@ export const PortfolioPage: React.FC = () => {
         />
       </Helmet>
 
-      <section className="min-h-[calc(100vh-60px)] flex flex-col justify-center pt-20 pb-24 md:min-h-[calc(100vh-80px)] md:pt-28 md:pb-16 bg-[var(--bg-primary)] relative overflow-hidden text-left">
+      <section className="min-h-[calc(100vh-60px)] flex flex-col justify-center pt-28 pb-24 md:min-h-[calc(100vh-80px)] md:pt-36 md:pb-16 bg-[var(--bg-primary)] relative overflow-hidden text-left">
         {/* Ambient Radial Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-cyan-500/10 via-blue-600/5 to-indigo-600/10 blur-3xl pointer-events-none rounded-full" />
 

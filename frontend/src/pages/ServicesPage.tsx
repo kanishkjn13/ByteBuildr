@@ -132,7 +132,7 @@ export const ServicesPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 1. STANDALONE HERO SECTION (Fills 100% of Viewport Above-The-Fold)        */}
       {/* ========================================================================= */}
-      <section className="min-h-[calc(100vh-60px)] flex flex-col justify-center pt-16 pb-16 md:min-h-[calc(100vh-80px)] md:pt-28 md:pb-16 bg-[var(--bg-primary)] text-left relative overflow-hidden">
+      <section className="min-h-[calc(100vh-60px)] flex flex-col justify-center pt-28 pb-16 md:min-h-[calc(100vh-80px)] md:pt-36 md:pb-16 bg-[var(--bg-primary)] text-left relative overflow-hidden">
         {/* Subtle Ambient Background Glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 blur-3xl pointer-events-none rounded-full" />
 

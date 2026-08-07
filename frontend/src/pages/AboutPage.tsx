@@ -81,7 +81,7 @@ export const AboutPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 1. STANDALONE HERO SECTION (Fills 100% of Viewport Above-The-Fold)        */}
       {/* ========================================================================= */}
-      <section className="min-h-[calc(100vh-60px)] md:min-h-[calc(100vh-80px)] flex flex-col justify-center pt-20 pb-16 md:pt-28 md:pb-16 bg-[var(--bg-primary)] text-left relative overflow-hidden">
+      <section className="min-h-[calc(100vh-60px)] md:min-h-[calc(100vh-80px)] flex flex-col justify-center pt-28 pb-16 md:pt-36 md:pb-16 bg-[var(--bg-primary)] text-left relative overflow-hidden">
         {/* Ambient Radial Background Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-gradient-to-tr from-cyan-500/10 via-blue-600/5 to-indigo-600/10 blur-3xl pointer-events-none rounded-full" />
 
