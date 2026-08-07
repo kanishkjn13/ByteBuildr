@@ -145,12 +145,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Link to={ROUTES.HOME} onClick={handleNavClick} className="flex items-center gap-2.5 group shrink-0">
               <img 
                 src="/logo.png" 
-                alt="Byte Build Logo" 
+                alt="ByteBuilders Logo" 
                 className="w-10 h-10 object-contain group-hover:scale-105 transition-all duration-300"
               />
               <div className="text-left transition-all duration-300">
                 <span className="font-extrabold tracking-tight text-[var(--text-primary)] block leading-none font-sans text-sm md:text-base">
-                  BYTE BUILD
+                  BYTEBUILDERS
                 </span>
                 <span className="text-[9px] font-mono tracking-[0.22em] text-[var(--accent-primary)] uppercase block mt-1 font-bold">
                   {agencyInfo.tagline}

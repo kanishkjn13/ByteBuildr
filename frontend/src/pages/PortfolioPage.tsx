@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, Check, ArrowRight, ChevronDown, RotateCw } from 'lucide-react';
-import { SEOHead } from '../seo/SEOHead';
+import { Helmet } from 'react-helmet-async';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { useBooking } from '../hooks/useBooking';
 import { useIsMobile } from '../hooks/useIsMobile';
@@ -159,10 +159,13 @@ export const PortfolioPage: React.FC = () => {
 
   return (
     <>
-      <SEOHead 
-        title="Featured Portfolio | Byte Build"
-        description="Explore our portfolio of high-performance web applications, client intake engines, and digital platforms."
-      />
+      <Helmet>
+        <title>Portfolio | ByteBuilders</title>
+        <meta
+          name="description"
+          content="Explore our latest software and web development projects."
+        />
+      </Helmet>
 
       <section className="min-h-[calc(100vh-60px)] flex flex-col justify-center pt-20 pb-24 md:min-h-[calc(100vh-80px)] md:pt-28 md:pb-16 bg-[var(--bg-primary)] relative overflow-hidden text-left">
         {/* Ambient Radial Glow */}

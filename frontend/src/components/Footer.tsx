@@ -35,12 +35,12 @@ export const Footer: React.FC = () => {
           <Link to={ROUTES.HOME} className="flex items-center gap-2.5 group text-left">
             <img 
               src="/logo.png" 
-              alt="Byte Build Logo" 
+              alt="ByteBuilders Logo" 
               className="w-7 h-7 object-contain group-hover:scale-105 transition-all duration-300"
             />
             <div>
               <span className="font-extrabold text-xs tracking-tight text-[var(--text-primary)] block leading-none">
-                BYTE BUILD
+                BYTEBUILDERS
               </span>
               <span className="text-[7.5px] font-mono tracking-[0.08em] text-[var(--text-tertiary)] uppercase block mt-0.5 font-bold">
                 {agencyInfo.tagline}
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
           <span className="hidden md:inline text-[var(--border-light)] font-light">|</span>
 
           <span className="text-[11px] font-mono text-[var(--text-tertiary)]">
-            © {new Date().getFullYear()} Byte Build. All rights reserved.
+            © {new Date().getFullYear()} ByteBuilders. All rights reserved.
           </span>
 
         </div>

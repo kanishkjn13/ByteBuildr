@@ -5,9 +5,9 @@
 export const generateOrganizationSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Byte Build',
-  url: 'https://bytebuild.com',
-  logo: 'https://bytebuild.com/logo.png',
+  name: 'ByteBuilders',
+  url: 'https://bytebuilders.pages.dev',
+  logo: 'https://bytebuilders.pages.dev/logo.png',
   description: 'Flagship digital growth agency building high-performance web applications, client intake engines, and custom software platforms.',
   address: {
     '@type': 'PostalAddress',
@@ -25,9 +25,9 @@ export const generateOrganizationSchema = () => ({
     availableLanguage: ['English']
   },
   sameAs: [
-    'https://linkedin.com/company/bytebuild',
-    'https://github.com/bytebuild',
-    'https://twitter.com/bytebuild'
+    'https://linkedin.com/company/bytebuilders',
+    'https://github.com/kanishkjn13/ByteBuildr',
+    'https://twitter.com/bytebuilders'
   ]
 });
 
@@ -38,8 +38,8 @@ export const generateServiceSchema = (name: string, description: string) => ({
   description,
   provider: {
     '@type': 'Organization',
-    name: 'Byte Build',
-    url: 'https://bytebuild.com'
+    name: 'ByteBuilders',
+    url: 'https://bytebuilders.pages.dev'
   },
   serviceType: 'Web Engineering & UI/UX Design'
 });
@@ -70,10 +70,10 @@ export const generateArticleSchema = (title: string, description: string, author
   image,
   publisher: {
     '@type': 'Organization',
-    name: 'Byte Build',
+    name: 'ByteBuilders',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://bytebuild.com/logo.png'
+      url: 'https://bytebuilders.pages.dev/logo.png'
     }
   }
 });

@@ -70,12 +70,12 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
             <div className="flex items-center gap-2.5">
               <img 
                 src="/logo.png" 
-                alt="Byte Build Logo" 
+                alt="ByteBuilders Logo" 
                 className="w-8 h-8 object-contain"
               />
               <div>
                 <span className="text-sm font-black text-[var(--text-primary)] tracking-tight block leading-none">
-                  BYTE BUILD
+                  BYTEBUILDERS
                 </span>
                 <span className="text-[9px] font-mono text-[var(--accent-primary)] uppercase tracking-wider font-extrabold block mt-0.5">
                   Admin Control Center
@@ -87,7 +87,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           {isCollapsed && (
             <img 
               src="/logo.png" 
-              alt="Byte Build Logo" 
+              alt="ByteBuilders Logo" 
               className="w-9 h-9 object-contain mx-auto"
             />
           )}

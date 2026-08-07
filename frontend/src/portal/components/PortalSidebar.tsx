@@ -66,12 +66,12 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
               <div className="flex items-center gap-3">
                 <img 
                   src="/logo.png" 
-                  alt="Byte Build Logo" 
+                  alt="ByteBuilders Logo" 
                   className="w-9 h-9 object-contain"
                 />
                 <div className="text-left">
                   <span className="font-extrabold text-sm tracking-tight text-[var(--text-primary)] block leading-none">
-                    BYTE BUILD
+                    BYTEBUILDERS
                   </span>
                   <span className="text-[9px] font-mono tracking-widest text-[var(--accent-primary)] uppercase block mt-0.5">
                     Client Portal
@@ -83,7 +83,7 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
             {isCollapsed && (
               <img 
                 src="/logo.png" 
-                alt="Byte Build Logo" 
+                alt="ByteBuilders Logo" 
                 className="w-9 h-9 object-contain mx-auto"
               />
             )}
@@ -163,12 +163,12 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
                   <div className="flex items-center gap-3">
                     <img 
                       src="/logo.png" 
-                      alt="Byte Build Logo" 
+                      alt="ByteBuilders Logo" 
                       className="w-9 h-9 object-contain"
                     />
                     <div className="text-left">
                       <span className="font-extrabold text-sm tracking-tight text-[var(--text-primary)] block leading-none">
-                        BYTE BUILD
+                        BYTEBUILDERS
                       </span>
                       <span className="text-[9px] font-mono tracking-widest text-[var(--accent-primary)] uppercase block mt-0.5 font-bold">
                         Client Portal

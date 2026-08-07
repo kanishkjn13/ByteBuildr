@@ -15,7 +15,7 @@ import {
   Clock,
   MapPin
 } from 'lucide-react';
-import { SEOHead } from '../seo/SEOHead';
+import { Helmet } from 'react-helmet-async';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { TextReveal } from '../components/effects/TextReveal';
 import { GradientText } from '../components/effects/GradientText';
@@ -126,10 +126,13 @@ export const ContactPage: React.FC = () => {
 
   return (
     <>
-      <SEOHead 
-        title="Contact Us | Byte Build"
-        description="Get in touch with Byte Build. Send us a message with your contact information and our team will reach out to you within 12 hours."
-      />
+      <Helmet>
+        <title>Contact ByteBuilders</title>
+        <meta
+          name="description"
+          content="Contact ByteBuilders for web development and AI solutions."
+        />
+      </Helmet>
 
       <section className="min-h-0 md:min-h-[calc(100vh-80px)] flex flex-col justify-start md:justify-center pt-20 pb-6 md:pb-16 bg-[var(--bg-primary)] relative overflow-hidden text-left">
         {/* Ambient Radial Background Glow */}

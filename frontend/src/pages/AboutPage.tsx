@@ -14,7 +14,7 @@ import {
   Lock, 
   Headphones 
 } from 'lucide-react';
-import { SEOHead } from '../seo/SEOHead';
+import { Helmet } from 'react-helmet-async';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { useBooking } from '../hooks/useBooking';
 import { ROUTES } from '../constants/routes';
@@ -70,10 +70,13 @@ export const AboutPage: React.FC = () => {
 
   return (
     <>
-      <SEOHead 
-        title="About Agency & Leadership | Byte Build"
-        description="Learn about Byte Build's engineering philosophy, architecture standards, and client acquisition commitment."
-      />
+      <Helmet>
+        <title>About ByteBuilders</title>
+        <meta
+          name="description"
+          content="Learn more about ByteBuilders and our mission."
+        />
+      </Helmet>
 
       {/* ========================================================================= */}
       {/* 1. STANDALONE HERO SECTION (Fills 100% of Viewport Above-The-Fold)        */}

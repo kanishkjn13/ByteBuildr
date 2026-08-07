@@ -11,7 +11,7 @@ import {
   Layout,
   Rocket
 } from 'lucide-react';
-import { SEOHead } from '../seo/SEOHead';
+import { Helmet } from 'react-helmet-async';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { useBooking } from '../hooks/useBooking';
 import { ROUTES } from '../constants/routes';
@@ -121,10 +121,13 @@ export const ServicesPage: React.FC = () => {
 
   return (
     <>
-      <SEOHead 
-        title="Services | Clean & Modern Web Development Agency"
-        description="Simple, affordable, and high-impact web development, UI/UX design, and website redesign services for growing businesses."
-      />
+      <Helmet>
+        <title>Web Development Services | ByteBuilders</title>
+        <meta
+          name="description"
+          content="Professional React, AI and software development services."
+        />
+      </Helmet>
 
       {/* ========================================================================= */}
       {/* 1. STANDALONE HERO SECTION (Fills 100% of Viewport Above-The-Fold)        */}

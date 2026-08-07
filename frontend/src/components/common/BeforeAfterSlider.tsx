@@ -61,7 +61,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ afterImage
         </div>
       </div>
 
-      {/* After Image (Byte Build - Vibrant color) */}
+      {/* After Image (ByteBuilders - Vibrant color) */}
       <div
         className="absolute inset-y-0 left-0 overflow-hidden z-10 border-r-2 border-white shadow-xl"
         style={{ width: `${sliderPos}%` }}
@@ -69,12 +69,12 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ afterImage
         <div className="absolute inset-y-0 left-0 w-[260px] h-full">
           <img
             src={afterImage}
-            alt={`${alt} - After Byte Build`}
+            alt={`${alt} - After ByteBuilders`}
             className="w-full h-full object-cover"
             draggable={false}
           />
           <div className="absolute top-3 left-3 bg-emerald-500/90 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded-full shadow-sm">
-            After (Byte Build Speed)
+            After (ByteBuilders Speed)
           </div>
         </div>
       </div>

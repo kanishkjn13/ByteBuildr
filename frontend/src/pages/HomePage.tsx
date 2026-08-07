@@ -1,5 +1,5 @@
 import React from 'react';
-import { SEOHead } from '../seo/SEOHead';
+import { Helmet } from 'react-helmet-async';
 import { Hero } from '../components/Hero';
 import { TrustStrip } from '../components/sections/TrustStrip';
 import { ServicesGrid } from '../components/ServicesGrid';
@@ -26,10 +26,13 @@ export const HomePage: React.FC = () => {
 
   return (
     <>
-      <SEOHead 
-        title="Byte Build | Strategic Digital Growth Agency"
-        description="We build digital growth engines that earn trust, attract clients, and scale revenue for healthcare practices, luxury real estate, hospitality, legal firms, and scale-ups."
-      />
+      <Helmet>
+        <title>ByteBuilders | AI-Powered Web Development</title>
+        <meta
+          name="description"
+          content="Modern websites, AI solutions and software development."
+        />
+      </Helmet>
 
       <div id="main-content">
         {/* Section 1: Hero */}

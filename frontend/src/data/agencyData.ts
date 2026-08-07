@@ -1,7 +1,7 @@
 import type { IndustrySolution, PortfolioProject, ServiceItem, FaqItem, ResourceItem, TechStackItem } from '../types';
 
 export const agencyInfo = {
-  name: 'Byte Build',
+  name: 'ByteBuilders',
   tagline: 'We build trust',
   subheadline: 'We design and engineer bespoke web platforms, client intake engines, and digital brand experiences that earn long-term trust and accelerate revenue.',
   established: '2026',
@@ -18,7 +18,7 @@ export const trustLogos = [
   { name: 'Aura Health', category: 'Medical Practice', metric: '3.8x Bookings' },
   { name: 'Apex Estates', category: 'Luxury Real Estate', metric: '$18.5M Q1 Sales' },
   { name: 'L’Éclat Dining', category: 'Fine Hospitality', metric: '$65k Saved' },
-  { name: 'Byte Build Law', category: 'Corporate Practice', metric: '+190% Retainers' },
+  { name: 'ByteBuilders Law', category: 'Corporate Practice', metric: '+190% Retainers' },
   { name: 'Equinox MedSpa', category: 'Wellness & Spa', metric: '92% Retention' },
   { name: 'Acadian School', category: 'Executive Academy', metric: '4.5x Enrollment' }
 ];
@@ -236,8 +236,8 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'proj-law',
     industryId: 'legal',
-    title: 'Byte Build Law • Legal Intake & Retainer Platform',
-    clientName: 'Byte Build Corporate Law',
+    title: 'ByteBuilders Law • Legal Intake & Retainer Platform',
+    clientName: 'ByteBuilders Corporate Law',
     summary: 'Secure legal client onboarding portal with dynamic legal intake questionnaires and Stripe retainers.',
     tags: ['Legal Tech', 'Intake Funnel', 'Retainers'],
     heroImage: '/images/realestate.png',

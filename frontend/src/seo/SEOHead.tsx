@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { generateOrganizationSchema } from './schema';
 
 interface SEOHeadProps {
@@ -11,48 +12,39 @@ interface SEOHeadProps {
 }
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
-  title = 'Byte Build | Flagship Web Development & Growth Agency',
-  description = 'Byte Build engineers custom high-performance web software, client intake engines, and soft neomorphic platforms.',
-  image = 'https://bytebuild.com/og-image.png',
+  title = 'ByteBuilders | AI-Powered Web Development & Digital Solutions',
+  description = 'ByteBuilders builds modern websites, AI applications, SaaS platforms, business software, and scalable digital solutions.',
+  image = 'https://bytebuilders.pages.dev/logo.png',
   schema
 }) => {
   const location = useLocation();
-  const canonicalUrl = `https://bytebuild.com${location.pathname}`;
+  const canonicalUrl = `https://bytebuilders.pages.dev${location.pathname}`;
+  const targetSchema = schema || generateOrganizationSchema();
 
-  useEffect(() => {
-    // 1. Update Title
-    document.title = title;
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <link rel="canonical" href={canonicalUrl} />
+      
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:image" content={image} />
+      <meta property="og:site_name" content="ByteBuilders" />
 
-    // 2. Update Meta Description
-    let metaDescription = document.querySelector("meta[name='description']");
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute('content', description);
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
 
-    // 3. Update Canonical Tag
-    let canonicalTag = document.querySelector("link[rel='canonical']");
-    if (!canonicalTag) {
-      canonicalTag = document.createElement('link');
-      canonicalTag.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalTag);
-    }
-    canonicalTag.setAttribute('href', canonicalUrl);
-
-    // 4. Inject JSON-LD Schema
-    const targetSchema = schema || generateOrganizationSchema();
-    let scriptTag = document.querySelector('#json-ld-schema');
-    if (!scriptTag) {
-      scriptTag = document.createElement('script');
-      scriptTag.setAttribute('id', 'json-ld-schema');
-      scriptTag.setAttribute('type', 'application/ld+json');
-      document.head.appendChild(scriptTag);
-    }
-    scriptTag.textContent = JSON.stringify(targetSchema);
-
-  }, [title, description, canonicalUrl, image, schema]);
-
-  return null;
+      {/* Schema.org / JSON-LD */}
+      <script type="application/ld+json">
+        {JSON.stringify(targetSchema)}
+      </script>
+    </Helmet>
+  );
 };
