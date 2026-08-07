@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bytebuild.com/sitemap.xml
+Sitemap: https://bytebuilders.pages.dev/sitemap.xml
